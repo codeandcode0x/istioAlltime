@@ -11,6 +11,9 @@ func DefinitionRoute(router *gin.Engine) {
 	router.Use(gin.Recovery())
 	// route
 	// home
+	var homeController *controller.HomeController
+	router.GET("/", homeController.ProxyHome)
+	router.LoadHTMLGlob("web/*")
 	// user
 	var userController *controller.UserController
 	router.GET("/api/users", userController.GetAllUsers)
