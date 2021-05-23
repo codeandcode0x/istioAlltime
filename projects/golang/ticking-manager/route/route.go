@@ -2,6 +2,7 @@ package route
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"ticket-manager/controller"
 )
 
@@ -13,13 +14,27 @@ func DefinitionRoute(router *gin.Engine) {
 	// home
 	var homeController *controller.HomeController
 	router.GET("/", homeController.ProxyHome)
-	router.LoadHTMLGlob("web/*")
+	router.Static("/web/assets", "./web/assets")
+	router.StaticFS("/web/upload", http.Dir("/web/upload"))
+	router.LoadHTMLGlob("web/*.tmpl")
+
+	router.GET("/user/add", homeController.AddUser)
+	router.GET("/movie/add", homeController.AddMovie)
+
 	// user
 	var userController *controller.UserController
-	router.GET("/api/users", userController.GetAllUsers)
-	router.POST("/api/user/create", userController.CreateUser)
-	router.POST("/api/user/update", userController.UpdateUser)
-	router.POST("/api/user/delete", userController.DeleteUser)
+	router.GET("/users", userController.GetAllUsers)
+	router.POST("/user/create", userController.CreateUser)
+	router.POST("/user/update", userController.UpdateUser)
+	router.POST("/user/delete", userController.DeleteUser)
+
+	// movie
+	var movieController *controller.MovieController
+	router.GET("/movies", movieController.GetAllMovies)
+	router.POST("/movie/create", movieController.CreateMovie)
+	router.POST("/movie/update", movieController.UpdateMovie)
+	router.POST("/movie/delete", movieController.DeleteMovie)
+
 
 	// authorized := router.Group("/admin", gin.BasicAuth(gin.Accounts{
 	// 	"admin": "admin", 

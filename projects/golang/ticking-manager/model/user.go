@@ -2,7 +2,6 @@ package model
 
 import (
 	"database/sql"
-	"fmt"
 	"gorm.io/gorm"
 	"ticket-manager/db"
 	"time"
@@ -45,7 +44,6 @@ func (u *User) Update(uid uint64, user *User) (int64, error) {
 
 
 func (u *User) Delete(uid uint64) (int64, error) {
-	fmt.Println("uid", uid)
 	result := db.DBConn.Model(&User{}).Where("id = ?", uid).Delete(&User{})
 	return result.RowsAffected, result.Error
 }

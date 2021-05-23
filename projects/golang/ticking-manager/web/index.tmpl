@@ -1,77 +1,107 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8"> 
-	<title>{{.title}}</title>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<style>
-    .fakeimg {
-        height: 200px;
-         background: #aaa;
-    }
-  </style>
-
-   {{template "header"}}
-   
-</head>
-<body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">票务管理系统后台</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">首页</a></li>
-        <li><a href="#">电影</a></li>
-        <li><a href="#">演出</a></li>
-        <li><a href="#">活动</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+{{template "header"}}
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <h2>关于我</h2>
-      <h5>我的照片:</h5>
-      <div class="fakeimg">这边插入图像</div>
-      <p>关于我的介绍..</p>
-      <h3>链接</h3>
-      <p>描述文本。</p>
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#">链接 1</a></li>
-        <li><a href="#">链接 2</a></li>
-        <li><a href="#">链接 3</a></li>
-      </ul>
-      <hr class="hidden-sm hidden-md hidden-lg">
+
+  
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">电影列表</h1>
+  <p class="lead"></p>
+  </div>
+
+
+  <div class="card-deck mb-3">
+
+    {{range $i, $movie := .movies}}
+
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal text-center">{{$movie.Name}}</h4>
+      </div>
+      <div class="card-body">
+        <div class="list-unstyled mt-3 mb-4 text-center">
+          <img src="{{$movie.Image}}" style="width: 250px" />
+        </div>
+
+        <div class="list-unstyled mt-3 mb-4">
+         <span style="text-align: left; font-size: 14px;">{{$movie.Minfo}}</span>
+        </div>
+
+        <table class="col-12">
+          <tr>
+            <td style="border: none;">
+              <form action="/movie/update" method="post" class="form-horizontal" role="form" enctype="application/x-www-form-urlencoded">
+              <input type="hidden" name="id" id="id" value="{{ $movie.ID }}">
+              <button type="button" class="btn btn-sm btn-block btn-outline-primary"> 更新 </button>
+              </form>
+            </td>
+            <td style="border: none;">
+              <form action="/movie/delete" method="post" class="form-horizontal" role="form" enctype="application/x-www-form-urlencoded">
+              <input type="hidden" name="id" id="id" value="{{ $movie.ID }}">
+              <button type="submit" class="btn btn-sm btn-block btn-outline-primary"> 删除 </button>
+              </form>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
-    <div class="col-sm-8">
-      <h2>标题</h2>
-      <h5>副标题</h5>
-      <div class="fakeimg">图像</div>
-      <p>一些文本..</p>
-      <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
-      <br>
-      <h2>标题</h2>
-      <h5>副标题</h5>
-      <div class="fakeimg">图像</div>
-      <p>一些文本..</p>
-      <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+
+    {{end}}
+   
+    <div class="card mb-4 shadow-sm">
+      <a href="/movie/add" type="button" class="btn btn-sm btn-block btn-outline-primary"> 添加电影 </a>
     </div>
   </div>
-</div>
 
-<div class="jumbotron text-center" style="margin-bottom:0">
-  <p>底部内容</p>
-</div>
-</body>
-</html>
+
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <table class="table table-bordered">
+        <caption class="col-6 offset-3">
+          <a href="/user/add" type="button" class="btn btn-sm btn-block btn-outline-primary">
+            添加用户
+          </a>
+        </caption>
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>密码</th>
+            <th>邮箱</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $i, $user := .users}}
+          <tr>
+            <td>{{ $user.Name }}</td>
+            <td>{{ $user.Password }}</td>
+            <td>{{ $user.Email }}</td>
+            <td>
+              <table class="col-12">
+                <tr>
+                  <td style="border: none;">
+                    <form action="/user/update" method="post" class="form-horizontal" role="form" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" name="uid" id="uid" value="{{ $user.ID }}">
+                    <button type="button" class="btn btn-sm btn-block btn-outline-primary"> 更新 </button>
+                    </form>
+                  </td>
+                  <td style="border: none;">
+                    <form action="/user/delete" method="post" class="form-horizontal" role="form" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" name="id" id="id" value="{{ $user.ID }}">
+                    <button type="submit" class="btn btn-sm btn-block btn-outline-primary"> 删除 </button>
+                    </form>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+
+
+{{template "footer"}}
+

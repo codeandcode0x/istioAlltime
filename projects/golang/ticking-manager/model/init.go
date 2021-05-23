@@ -12,4 +12,5 @@ func init() {
 // Migrate Model
 func AutoMigrateAll() {
     DBConn.Table("users").AutoMigrate(&User{})
+    DBConn.Table("movies").AutoMigrate(&Movie{})
 }
