@@ -45,7 +45,6 @@ func (hc *HomeController) ProxyHome(c *gin.Context) {
 
 
 func (hc *HomeController) AddUser(c *gin.Context) {
-
 	c.HTML(http.StatusOK, "add.tmpl", gin.H{
 			"title": "添加用户",
 		})
@@ -53,11 +52,32 @@ func (hc *HomeController) AddUser(c *gin.Context) {
 
 
 func (hc *HomeController) AddMovie(c *gin.Context) {
-
 	c.HTML(http.StatusOK, "addmovie.tmpl", gin.H{
 		"title": "添加电影",
 	})
 }
+
+
+func (hc *HomeController) Login(c *gin.Context) {
+	c.HTML(http.StatusOK, "login.tmpl", gin.H{
+		"title": "用户登录",
+	})
+}
+
+
+func (hc *HomeController) DoLogin(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.tmpl", gin.H{
+		"title": "票务管理系统后台",
+	})
+}
+
+
+func (hc *HomeController) Logout(c *gin.Context) {
+	c.HTML(http.StatusOK, "login.tmpl", gin.H{
+		"title": "用户登录",
+	})
+}
+
 
 
 

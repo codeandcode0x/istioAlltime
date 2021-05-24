@@ -18,6 +18,10 @@ func DefinitionRoute(router *gin.Engine) {
 	router.StaticFS("/web/upload", http.Dir("/web/upload"))
 	router.LoadHTMLGlob("web/*.tmpl")
 
+	router.GET("/login", homeController.Login)
+	router.GET("/dologin", homeController.DoLogin)
+	router.GET("/logout", homeController.Logout)
+
 	router.GET("/user/add", homeController.AddUser)
 	router.GET("/movie/add", homeController.AddMovie)
 
