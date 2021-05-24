@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 	"net/http"
 	"strconv"
@@ -26,13 +27,31 @@ func (uc *UserController) getUserController() *UserController {
 // create user
 func (uc *UserController) CreateUser(c *gin.Context) {
 	name := c.PostForm("name")
-	passwd := c.PostForm("passwd")
+	password, exists := c.GetPostForm("password")
+	if ! exists {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"error": "password is null",
+		})
+	}
+
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"error": "bcrypt password err",
+		})
+	}
+
+	password = string(hash)
 	email := c.PostForm("email")
+	role := c.PostForm("role")
 	age, _ :=  strconv.Atoi(c.PostForm("age"))
 	user := &model.User{
 		Name:         name,
-		Password:     passwd,
+		Password:     password,
 		Email:        email,
+		Role:         role,
 		Age:          age,
 		Birthday:     time.Now(),
 		MemberNumber: sql.NullString{},

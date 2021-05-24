@@ -10,7 +10,7 @@ import (
 var DBConn *gorm.DB
 
 func init() {
-	dsn := "root:root123@tcp(192.168.31.111:3306)/ticket-ops?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:root123@tcp(127.0.0.1:3306)/ticket-ops?charset=utf8mb4&parseTime=True&loc=Local"
 	err := errors.New("connect database error !")
   	DBConn, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 

@@ -64,8 +64,8 @@
         <thead>
           <tr>
             <th>姓名</th>
-            <th>密码</th>
             <th>邮箱</th>
+            <th>角色</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -73,8 +73,8 @@
           {{range $i, $user := .users}}
           <tr>
             <td>{{ $user.Name }}</td>
-            <td>{{ $user.Password }}</td>
             <td>{{ $user.Email }}</td>
+            <td>{{ $user.Role }}</td>
             <td>
               <table class="col-12">
                 <tr>

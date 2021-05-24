@@ -16,6 +16,7 @@ type User struct {
   	Age          int   `json:"age,omitempty"`
   	Birthday     time.Time  `json:"birthday,omitempty"`
   	MemberNumber sql.NullString  `json:"member_number,omitempty"`
+	Role         string  `json:"Role,omitempty"`
 	gorm.Model
 }
 
@@ -62,13 +63,13 @@ func (u *User) FindByID(uid uint64) (*User, error) {
 	return user, result.Error
 }
 
-
-func (u *User) FindByName(name string) (*User, error) {
-	return &User{}, nil
+func (u *User) FindByEmail(email string) (*User, error) {
+	var user *User
+	result := db.DBConn.Model(&User{}).Where("email", email).First(&user)
+	return user, result.Error
 }
 
-
-func (u *User) FindByEmail(email string) (*User, error) {
+func (u *User) FindByName(name string) (*User, error) {
 	return &User{}, nil
 }
 

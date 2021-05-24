@@ -25,6 +25,11 @@ func (u *UserService) FindUserById(uid uint64) (*model.User, error) {
 	return u.getUserService().Model.FindByID(uid)
 }
 
+// find user by email
+func (u *UserService) FindUserByEmail(email string) (*model.User, error) {
+	return u.getUserService().Model.FindByEmail(email)
+}
+
 // create user
 func (u *UserService) CreateUser(user *model.User) (uint64, error) {
 	return u.getUserService().Model.Create(user)

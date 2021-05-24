@@ -3,6 +3,8 @@ package middleware
 import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
+    "github.com/gin-gonic/gin"
+    "net/http"
 )
 
 // 使用 Cookie 保存 session
@@ -18,8 +20,8 @@ func AuthMiddle() gin.HandlerFunc {
         session := sessions.Default(c)
         sessionValue := session.Get("userId")
         if sessionValue == nil {
-            c.JSON(http.StatusUnauthorized, gin.H{
-                "error": "Unauthorized",
+            c.HTML(http.StatusOK, "login.tmpl", gin.H{
+                "title": "用户登录",
             })
             c.Abort()
             return
