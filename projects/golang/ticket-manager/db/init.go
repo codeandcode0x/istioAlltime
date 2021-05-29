@@ -10,6 +10,7 @@ import (
   "os"
   "ticket-manager/util"
   "time"
+  "fmt"
 )
 
 // DBConn
@@ -55,9 +56,11 @@ func init() {
   if dbLogMode == "" {
     dbLogMode = viper.GetString("DB_LOGMODE")
     if dbLogMode == "Warn" {
-    logLevel = logger.Warn
+      logLevel = logger.Warn
+    }
   }
-  }
+
+  fmt.Println("get env :", dbHost, dbPort, dbUser, dbName, dbLogMode)
 
   DBLogger := logger.New(
     log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer

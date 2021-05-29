@@ -6,10 +6,9 @@ WORKDIR /opt/app/
 
 RUN apt-get install git && \
 	git clone https://github.com/codeandcode0x/istioAlltime.git && \
-	cd istioAlltime/projects/golang/ticking-manager/ && \
+	cd istioAlltime/projects/golang/ticket-manager/ && \
     CGO_ENABLED=0 GOOS=linux go build -o /opt/app/ticket-backend main.go && \
     ls -all /opt/app/
-
 
 
 FROM ubuntu:16.04 as prod

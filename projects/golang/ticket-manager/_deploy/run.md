@@ -1,6 +1,12 @@
 # Run
-# mariadb
+
+## build 
+
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o
+
+
+## mariadb
 docker run -p 127.0.0.1:3306:3306  --name mariadb -e MARIADB_ROOT_PASSWORD=root123 -d mariadb:10.2.38
 
-# backend
+## backend
 docker run -p 8080:8080  --name ticket-backend -d roandocker/ticket-backend:0.0.1
