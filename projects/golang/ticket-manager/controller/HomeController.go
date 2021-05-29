@@ -34,7 +34,6 @@ func (hc *HomeController) DoLogin(c *gin.Context) {
 	user, errFind := us.FindUserByEmail(email)
 
 	if user == nil || errFind != nil {
-		
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
 			"error": "user not find or find err !",
