@@ -31,7 +31,7 @@ services:
     depends_on:
     - initdata-job
     image: roandocker/ticket-manager:0.0.1
-    command: /bin/sh -c "./ticker-manager; tail -f /dev/null"
+    command: /bin/sh -c "./ticket-manager"
     ports:
       - 8080:8080
     environment:

@@ -32,12 +32,12 @@ function push() {
 
 #main 
 function main() {
-	build $1
+	build $1 $2
 	prune
-	push
+	push $1 $2
 }
 
 # run main
-main $appVersion
+main $appVersion $repoUser
 
 export TICKET_VERSION=$appVersion
