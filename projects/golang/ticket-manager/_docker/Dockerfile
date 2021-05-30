@@ -18,7 +18,7 @@ FROM ubuntu:16.04 as prod
 
 WORKDIR /root/
 
-COPY --from=0 /opt/app/ticket-backend /root
+COPY --from=0 /opt/app/ticket-manager /root
 COPY --from=0 /opt/app/config/Config.yaml  /root/config/Config.yaml
 COPY --from=0 /opt/app/web /root/web/
 
