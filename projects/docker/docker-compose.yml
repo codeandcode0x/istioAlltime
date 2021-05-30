@@ -9,6 +9,7 @@ services:
       - todo-mysql-data:/var/lib/mysql
     environment: 
       MARIADB_ROOT_PASSWORD: root123
+    restart: on-failure
 
   initdata-job:
     depends_on:
@@ -27,6 +28,7 @@ services:
       DBUSER: "root"
       DBPASSWD: "root123"
       INTERVAL_TIME: "5"
+    restart: on-failure
 
   ticker-manager:
     depends_on:
@@ -42,6 +44,7 @@ services:
       DB_PASSWD: root123
       DB_DATABASE: ticket
       DB_LOGMODE: "true"
+    restart: always
 
 
 volumes:
