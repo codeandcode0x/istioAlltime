@@ -11,7 +11,7 @@ COPY web /opt/app/web/
 RUN apt-get install git && \
 	git clone https://github.com/codeandcode0x/istioAlltime.git && \
 	cd istioAlltime/projects/golang/ticket-manager/ && \
-    CGO_ENABLED=0 GOOS=linux go build -o /opt/app/ticket-backend main.go
+    CGO_ENABLED=0 GOOS=linux go build -o /opt/app/ticket-manager main.go
 
 
 FROM ubuntu:16.04 as prod
@@ -23,6 +23,6 @@ COPY --from=0 /opt/app/config/Config.yaml  /root/config/Config.yaml
 COPY --from=0 /opt/app/web /root/web/
 
 RUN ls -all
-RUN chmod 777 ticket-backend
+RUN chmod 777 ticket-manager
 
 CMD ["./ticket-backend"]

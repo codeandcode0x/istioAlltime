@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+  mariadb:
+    image: mariadb:10.2.38
+    ports:
+      - 3306:3306
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment: 
+      MARIADB_ROOT_PASSWORD: root123
+
+  initdata-job:
+    depends_on:
+    - mariadb
+    image: roandocker/initdata-job:latest
+    command: /bin/sh -c "/app/initdata.sh istioAlltime/data/sql coding"
+    environment: 
+      MARIADB_SERVICE_HOST: "mariadb"
+      SQL_FILE: "istioAlltime"
+      GIT_BRANCH: "master"
+      GITURL: "github.com/codeandcode0x/istioAlltime.git"
+      GITUSER: ""
+      GITPASSWD: ""
+      MIGRATION: "MARIADB_SERVICE_HOST"
+      DBUSER: "root"
+      DBPASSWD: "root123"
+      INTERVAL_TIME: "5"
+
+  ticker-manager:
+    depends_on:
+    - initdata-job
+    image: roandocker/ticket-manager:0.0.1
+    command: /bin/sh -c "./ticker-manager; tail -f /dev/null"
+    ports:
+      - 8080:8080
+    environment:
+      DB_HOST: mariadb
+      DB_PORT: "3306"
+      DB_USER: root
+      DB_PASSWD: root123
+      DB_DATABASE: ticket
+      DB_LOGMODE: "true"
+
+
+volumes:
+  todo-mysql-data:
