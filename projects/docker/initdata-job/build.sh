@@ -32,7 +32,7 @@ function push() {
 function main() {
 	build $1 $2
 	prune
-	push
+	push $1 $2
 }
 
 # run main

@@ -3,17 +3,17 @@ set -e;
 
 sleep $INTERVAL_TIME;
 
-if [ -d "$SQL_FILE" ]
-then
-  rm -rf $SQL_FILE;
-fi
+# if [ -d "$SQL_FILE" ]
+# then
+#   rm -rf $SQL_FILE;
+# fi
 
 #e.coding.net/codingcorp/coding-dev/coding-dev-sql.git
 if [ -z $GIT_BRANCH ]
 then
   GIT_BRANCH="master";
 fi
-git clone --depth=1 -b $GIT_BRANCH  https://$GITUSER:$GITPASSWD@$GITURL;
+# git clone --depth=1 -b $GIT_BRANCH  https://$GITUSER:$GITPASSWD@$GITURL;
 
 # check
 instance=`eval echo '$'"$MIGRATION"`;
