@@ -20,7 +20,7 @@ WORKDIR /root/
 
 COPY --from=0 /opt/app/ticket-backend /root
 COPY --from=0 /opt/app/config/Config.yaml  /root/config/Config.yaml
-COPY --from=0 /opt/app/web/ /opt/app/web/
+COPY --from=0 /opt/app/web /root/web/
 
 RUN ls -all
 RUN chmod 777 ticket-backend

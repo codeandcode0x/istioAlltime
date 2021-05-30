@@ -13,7 +13,7 @@ services:
   ticket-backend:
     depends_on:
     - mariadb
-    image: roandocker/ticket-manager:0.0.3
+    image: roandocker/ticket-manager:0.0.1
     command: sh -c "./ticker-backend; tail -f /dev/null"
     ports:
       - 8080:8080
