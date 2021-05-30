@@ -14,4 +14,4 @@ COPY ./initdata.sh  /app
 COPY --from=0 /opt/app/istioAlltime  /app/istioAlltime/
 
 # run command
-CMD ["/bin/bash", "/app/initdata.sh 'istioAlltime/projects/data/sql' 'ticket' "]
+ENTRYPOINT ["/bin/bash /app/initdata.sh", "istioAlltime/projects/data/sql, "ticket"]
