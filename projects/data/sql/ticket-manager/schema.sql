@@ -5,7 +5,7 @@ LIMIT 0, 1000
 -- Date: 2021-05-24 23:49
 */
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `ticket`.`users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-CREATE TABLE IF NOT EXISTS `movies` (
+CREATE TABLE IF NOT EXISTS `ticket`.`movies` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,

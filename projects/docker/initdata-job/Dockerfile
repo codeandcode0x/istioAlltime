@@ -4,7 +4,7 @@ WORKDIR /opt/app/
 
 RUN rm -rf istioAlltime && \
 	apt-get install git && \
-	git clone https://github.com/codeandcode0x/istioAlltime.git 
+	git clone https://github.com/codeandcode0x/istioAlltime.git
 
 
 FROM mariadb:10.2.38 as prod
