@@ -4,4 +4,35 @@ LIMIT 0, 1000
 
 -- Date: 2021-05-24 23:49
 */
-INSERT INTO ticket.users(id,name,password,email,age,birthday,member_number,created_at,updated_at,deleted_at,role) VALUES (1,'itcast','$2a$10$E3H2UH9ZZhIjFQ7Rl5fTzO9S8B657./80XsKwOUtolwXoYNqCnESi','82713@itcast.cn',0,'2021-05-24 23:39:01.278','1','2021-05-24 23:39:01.280','2021-05-24 23:39:01.280',NULL,'管理员');
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `age` bigint(20) DEFAULT NULL,
+  `birthday` datetime(3) DEFAULT NULL,
+  `member_number` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime(3) DEFAULT NULL,
+  `updated_at` datetime(3) DEFAULT NULL,
+  `deleted_at` datetime(3) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_users_deleted_at` (`deleted_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE IF NOT EXISTS `movies` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `actors` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mtype` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `minfo` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mtime` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime(3) DEFAULT NULL,
+  `updated_at` datetime(3) DEFAULT NULL,
+  `deleted_at` datetime(3) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_movies_deleted_at` (`deleted_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
