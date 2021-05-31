@@ -24,6 +24,8 @@ func DefinitionRoute(router *gin.Engine) {
 	router.GET("/login", homeController.Login)
 	router.POST("/dologin", homeController.DoLogin)
 
+	var movieController *controller.MovieController
+
 	auth := router.Group("/")
 	auth.Use(middleware.AuthMiddle())
 	{
@@ -40,12 +42,16 @@ func DefinitionRoute(router *gin.Engine) {
 		auth.POST("/user/delete", userController.DeleteUser)
 
 		// movie
-		var movieController *controller.MovieController
 		auth.GET("/movies", movieController.GetAllMovies)
 		auth.POST("/movie/create", movieController.CreateMovie)
 		auth.POST("/movie/update", movieController.UpdateMovie)
 		auth.POST("/movie/delete", movieController.DeleteMovie)
 	}
+
+	// api
+	api := router.Group("/api")
+	api.GET("/movies", movieController.GetAllMovies)
+	api.GET("/movie/:id", movieController.GetMovieByID)
 
 	// authorized.GET("/secrets", func(c *gin.Context) {
  //        // 获取用户，它是由 BasicAuth 中间件设置的

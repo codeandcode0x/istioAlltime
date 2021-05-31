@@ -72,7 +72,7 @@ func (hc *HomeController) ProxyHome(c *gin.Context) {
 		})
 	}
 
-	movies, errMovies := ms.FindAllMovies()
+	movies, errMovies := ms.FindAllMovies(10)
 	if errMovies != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,

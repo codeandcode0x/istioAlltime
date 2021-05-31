@@ -55,7 +55,15 @@ func (uc *MovieController) CreateMovie(c *gin.Context) {
 }
 
 func (uc *MovieController) GetAllMovies(c *gin.Context) {
-	movies, err := uc.getMovieController().Service.FindAllMovies()
+	// var movies []model.Movie{}
+	// var err error
+	count := 10
+	countStr, exists := c.GetQuery("count")
+	if exists {
+		count, _ = strconv.Atoi(countStr)
+	}
+	movies, err := uc.getMovieController().Service.FindAllMovies(count)
+
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
@@ -70,8 +78,29 @@ func (uc *MovieController) GetAllMovies(c *gin.Context) {
 }
 
 
-func (uc *MovieController) GetMovieByID() {
-	
+func (uc *MovieController) GetMovieByID(c *gin.Context) {
+	id, exists := c.GetQuery("count")
+	if !exists {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"error": "id is null",
+		})
+		return
+	}
+
+	idUint64, _ := strconv.ParseUint(id, 10, 64)
+	movie, err := uc.getMovieController().Service.FindMovieById(idUint64)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"error": err,
+		})
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code": 0,
+		"data": movie,
+	})
 }
 
 // update Movie

@@ -15,8 +15,6 @@ services:
     depends_on:
     - mariadb
     image: roandocker/initdata-job:latest
-    # entrypoint: /bin/bash
-    # command: ["istioAlltime/projects/data/sql", "ticket"]
     environment: 
       MARIADB_SERVICE_HOST: "mariadb"
       SQL_FILE: "istioAlltime"

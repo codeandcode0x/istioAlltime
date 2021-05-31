@@ -16,8 +16,8 @@ func (u *MovieService) getMovieService() *MovieService {
 }
 
 // find all Movies
-func (u *MovieService) FindAllMovies() ([]model.Movie, error) {
-	return u.getMovieService().Model.FindAll()
+func (u *MovieService) FindAllMovies(count int) ([]model.Movie, error) {
+	return u.getMovieService().Model.FindAll(count)
 }
 
 // find Movie by id

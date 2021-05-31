@@ -6,7 +6,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="robots" content="all">
-    <title>家</title>
+    <title>票务平台</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/static/index/bootstrap.min.css">
@@ -1108,271 +1108,67 @@
                                                     <div class="owl-wrapper-outer">
                                                         <!-- 热映影片数据 -->
                                                         <div class="owl-wrapper" style="width: 4384px; left: 0px; display: block;">
-                                                            <div class="owl-item" style="width: 274px;">
-                                                                <div class="item item-carousel">
-                                                                    <div class="products">
-                                                                        <div class="product">
-                                                                            <div class="product-image">
-                                                                                <div class="image">
-                                                                                    <a href="/detail">
-                                                                                        <img src="https://p0.meituan.net/movie/3ad18f011110130e927d50046fde86f71038961.jpg" alt="">
-                                                                                        <img src="https://p0.meituan.net/movie/3ad18f011110130e927d50046fde86f71038961.jpg" alt="" class="hover-image">
-                                                                                    </a>
+                                                            <!-- range data -->
+                                                            <div th:each="movie,index:${movies}">
+
+                                                                <div class="owl-item" style="width: 274px;">
+                                                                    <div class="item item-carousel">
+                                                                        <div class="products">
+                                                                            <div class="product">
+                                                                                <div class="product-image">
+                                                                                    <div class="image">
+                                                                                        <a href="/detail">
+                                                                                            <img th:src="${movie['image']}" >
+                                                                                            <img th:src="${movie['image']}" class="hover-image">
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <!-- /.image -->
+                                                                                    <div class="tag new">
+                                                                                        <span>
+                                                                                            <font style="vertical-align: inherit;">
+                                                                                                <font style="vertical-align: inherit;">新的</font>
+                                                                                            </font>
+                                                                                        </span>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <!-- /.image -->
-                                                                                <div class="tag new">
-                                                                                    <span>
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">新的</font>
-                                                                                        </font>
-                                                                                    </span>
+                                                                                <!-- /.product-image -->
+                                                                                <div class="product-info text-left">
+                                                                                    <h3 class="name">
+                                                                                        <a href="/detail">
+                                                                                            <font style="vertical-align: inherit;">
+                                                                                                <font style="vertical-align: inherit;"  th:text="${movie['name']}">
+                                                                                               </font>
+                                                                                            </font>
+                                                                                        </a>
+                                                                                    </h3>
+                                                                                    <div class="description"></div>
+                                                                                    <div class="product-price">
+                                                                                        <span class="price">
+                                                                                            <font style="vertical-align: inherit;">
+                                                                                                <font style="vertical-align: inherit;" th:text="${movie['mtype']}"> </font>
+                                                                                            </font>
+                                                                                        </span>
+                                                                                        <span class="price-before-discount">
+                                                                                            <font style="vertical-align: inherit;">
+                                                                                                <font style="vertical-align: inherit;" th:text="${movie['mtime']}"></font>
+                                                                                            </font>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                    <!-- /.product-price -->
                                                                                 </div>
-                                                                            </div>
-                                                                            <!-- /.product-image -->
-                                                                            <div class="product-info text-left">
-                                                                                <h3 class="name">
-                                                                                    <a href="/detail">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">悬崖之上 Cliff Walkers</font>
-                                                                                        </font>
-                                                                                    </a>
-                                                                                </h3>
-                                                                                <div class="description"></div>
-                                                                                <div class="product-price">
-                                                                                    <span class="price">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">剧情 悬疑 动作 </font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                    <span class="price-before-discount">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">中国大陆 / 120分钟</font>
-                                                                                        </font>
-                                                                                    </span>
+                                                                                <!-- /.product-info -->
+                                                                                <div class="cart clearfix animate-effect" style="display: none">
                                                                                 </div>
-                                                                                <!-- /.product-price -->
+                                                                                <!-- /.cart -->
                                                                             </div>
-                                                                            <!-- /.product-info -->
-                                                                            <div class="cart clearfix animate-effect" style="display: none">
-                                                                            </div>
-                                                                            <!-- /.cart -->
                                                                         </div>
+                                                                        <!-- /.products -->
                                                                     </div>
-                                                                    <!-- /.products -->
                                                                 </div>
+                                                            <!--end range data -->
                                                             </div>
-                                                            <div class="owl-item" style="width: 274px;">
-                                                                <div class="item item-carousel">
-                                                                    <div class="products">
-                                                                        <div class="product">
-                                                                            <div class="product-image">
-                                                                                <div class="image">
-                                                                                    <a href="/detail">
-                                                                                        <img src="https://p1.meituan.net/movie/063be170e3b06db0b05d3bb338be1140855828.jpg" alt="">
-                                                                                        <img src="https://p1.meituan.net/movie/063be170e3b06db0b05d3bb338be1140855828.jpg" alt="" class="hover-image">
-                                                                                    </a>
-                                                                                </div>
-                                                                                <!-- /.image -->
-                                                                                <div class="tag new">
-                                                                                    <span>
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">新的</font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!-- /.product-image -->
-                                                                            <div class="product-info text-left">
-                                                                                <h3 class="name">
-                                                                                    <a href="/home">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">人之怒 Wrath of Man</font>
-                                                                                        </font>
-                                                                                    </a>
-                                                                                </h3>
-                                                                                <div class="description"></div>
-                                                                                <div class="product-price">
-                                                                                    <span class="price">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">动作 </font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                    <span class="price-before-discount">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">美国,英国 / 115分钟</font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                </div>
-                                                                                <!-- /.product-price -->
-                                                                            </div>
-                                                                            <!-- /.product-info -->
-                                                                            <div class="cart clearfix animate-effect" style="display: none">
-                                                                            </div>
-                                                                            <!-- /.cart -->
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- /.products -->
-                                                                </div>
-                                                            </div>
-                                                            <div class="owl-item" style="width: 274px;">
-                                                                <div class="item item-carousel">
-                                                                    <div class="products">
-                                                                        <div class="product">
-                                                                            <div class="product-image">
-                                                                                <div class="image">
-                                                                                    <a href="/detail">
-                                                                                        <img src="https://p0.meituan.net/movie/67a1fe8a23b913b305a37fed1c54b7a35019988.jpg@464w_644h_1e_1c" alt="">
-                                                                                        <img src="https://p0.meituan.net/movie/67a1fe8a23b913b305a37fed1c54b7a35019988.jpg@464w_644h_1e_1c" alt="" class="hover-image">
-                                                                                    </a>
-                                                                                </div>
-                                                                                <!-- /.image -->
-                                                                                <div class="tag new">
-                                                                                    <span>
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">新的</font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!-- /.product-image -->
-                                                                            <div class="product-info text-left">
-                                                                                <h3 class="name">
-                                                                                    <a href="/home">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">追虎擒龙</font>
-                                                                                        </font>
-                                                                                    </a>
-                                                                                </h3>
-                                                                                <div class="description"></div>
-                                                                                <div class="product-price">
-                                                                                    <span class="price">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">犯罪 剧情 动作 </font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                    <span class="price-before-discount">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">中国大陆 / 105分钟</font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                </div>
-                                                                                <!-- /.product-price -->
-                                                                            </div>
-                                                                            <!-- /.product-info -->
-                                                                            <div class="cart clearfix animate-effect" style="display: none">
-                                                                            </div>
-                                                                            <!-- /.cart -->
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- /.products -->
-                                                                </div>
-                                                            </div>
-                                                            <div class="owl-item" style="width: 274px;">
-                                                                <div class="item item-carousel">
-                                                                    <div class="products">
-                                                                        <div class="product">
-                                                                            <div class="product-image">
-                                                                                <div class="image">
-                                                                                    <a href="/detail">
-                                                                                        <img src="https://p1.meituan.net/moviemachine/fdd380fb2f7f0f1742f9f7c8ae7c5fec7189073.jpg@464w_644h_1e_1c" alt="">
-                                                                                        <img src="https://p1.meituan.net/moviemachine/fdd380fb2f7f0f1742f9f7c8ae7c5fec7189073.jpg@464w_644h_1e_1c" alt="" class="hover-image">
-                                                                                    </a>
-                                                                                </div>
-                                                                                <!-- /.image -->
-                                                                                <div class="tag new">
-                                                                                    <span>
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">新的</font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!-- /.product-image -->
-                                                                            <div class="product-info text-left">
-                                                                                <h3 class="name">
-                                                                                    <a href="/detail">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">速度与激情9 The Fast Saga</font>
-                                                                                        </font>
-                                                                                    </a>
-                                                                                </h3>
-                                                                                <div class="description"></div>
-                                                                                <div class="product-price">
-                                                                                    <span class="price">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">动作 犯罪 冒险 </font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                    <span class="price-before-discount">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">美国 / 142分钟</font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                </div>
-                                                                                <!-- /.product-price -->
-                                                                            </div>
-                                                                            <!-- /.product-info -->
-                                                                            <div class="cart clearfix animate-effect" style="display: none">
-                                                                            </div>
-                                                                            <!-- /.cart -->
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- /.products -->
-                                                                </div>
-                                                            </div>
-                                                            <div class="owl-item" style="width: 274px;">
-                                                                <div class="item item-carousel">
-                                                                    <div class="products">
-                                                                        <div class="product">
-                                                                            <div class="product-image">
-                                                                                <div class="image">
-                                                                                    <a href="/detail">
-                                                                                        <img src="https://p0.meituan.net/moviemachine/b183a9143031dd4aab5ca95affe410f2579878.jpg@464w_644h_1e_1c" alt="">
-                                                                                        <img src="https://p0.meituan.net/moviemachine/b183a9143031dd4aab5ca95affe410f2579878.jpg@464w_644h_1e_1c" alt="" class="hover-image">
-                                                                                    </a>
-                                                                                </div>
-                                                                                <!-- /.image -->
-                                                                                <div class="tag new">
-                                                                                    <span>
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">新的</font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!-- /.product-image -->
-                                                                            <div class="product-info text-left">
-                                                                                <h3 class="name">
-                                                                                    <a href="/home">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">指环王：王者无敌 The Lord of the Rings</font>
-                                                                                        </font>
-                                                                                    </a>
-                                                                                </h3>
-                                                                                <div class="description"></div>
-                                                                                <div class="product-price">
-                                                                                    <span class="price">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">剧情 动作 奇幻 冒险 </font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                    <span class="price-before-discount">
-                                                                                        <font style="vertical-align: inherit;">
-                                                                                            <font style="vertical-align: inherit;">美国,新西兰 / 201分钟</font>
-                                                                                        </font>
-                                                                                    </span>
-                                                                                </div>
-                                                                                <!-- /.product-price -->
-                                                                            </div>
-                                                                            <!-- /.product-info -->
-                                                                            <div class="cart clearfix animate-effect" style="display: none">
-                                                                            </div>
-                                                                            <!-- /.cart -->
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- /.products -->
-                                                                </div>
-                                                            </div>
+                                                            
+
                                                         </div>
                                                         <!-- end 热映影片数据 -->
                                                     </div>

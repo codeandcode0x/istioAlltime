@@ -46,9 +46,9 @@ func (u *Movie) Delete(id uint64) (int64, error) {
 }
 
 
-func (u *Movie) FindAll() ([]Movie, error) {
+func (u *Movie) FindAll(count int) ([]Movie, error) {
 	var Movies []Movie
-	result := db.DBConn.Model(&Movie{}).Find(&Movies)
+	result := db.DBConn.Model(&Movie{}).Limit(count).Find(&Movies)
 	return Movies, result.Error
 }
 
