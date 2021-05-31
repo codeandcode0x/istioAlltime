@@ -12,8 +12,8 @@ func DefinitionRoute(router *gin.Engine) {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.Use(middleware.UseCookieSession())
-	// route
-	
+	// no route
+	router.NoRoute(NoRouteResponse)
 	// home
 	var homeController *controller.HomeController
 
@@ -53,16 +53,14 @@ func DefinitionRoute(router *gin.Engine) {
 	api.GET("/movies", movieController.GetAllMovies)
 	api.GET("/movie/:id", movieController.GetMovieByID)
 
-	// authorized.GET("/secrets", func(c *gin.Context) {
- //        // 获取用户，它是由 BasicAuth 中间件设置的
- //        user := c.MustGet(gin.AuthUserKey).(string)
+}
 
- //        if secret, ok := secrets[user]; ok {
- //            c.JSON(http.StatusOK, gin.H{"user": user, "secret": secret})
- //        } else {
- //            c.JSON(http.StatusOK, gin.H{"user": user, "secret": "NO SECRET :("})
- //        }
- //    })
+// no route
+func NoRouteResponse(c *gin.Context) {
+	c.JSON(http.StatusNotFound, gin.H{
+		"code": 404,
+		"error":  "oops, page not exists!",
+	})
 }
 
 

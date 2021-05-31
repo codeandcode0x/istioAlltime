@@ -2,9 +2,11 @@ package com.msa.ticket.fronted.pojo;
 
 import com.msa.ticket.fronted.model.Movie;
 
-public class MovieData {
+import java.util.List;
+
+public class MovieDatas {
     private Integer code;
-    private Movie data;
+    private List<Movie> data;
 
     public Integer getCode() {
         return code;
@@ -14,11 +16,11 @@ public class MovieData {
         this.code = code;
     }
 
-    public Movie getData() {
+    public List<Movie> getData() {
         return data;
     }
 
-    public void setData(Movie data) {
+    public void setData(List<Movie> data) {
         this.data = data;
     }
 

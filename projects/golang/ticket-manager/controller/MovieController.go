@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"ticket-manager/model"
 	"ticket-manager/service"
+	"ticket-manager/util"
 )
 
 type MovieController struct {
@@ -79,8 +80,8 @@ func (uc *MovieController) GetAllMovies(c *gin.Context) {
 
 
 func (uc *MovieController) GetMovieByID(c *gin.Context) {
-	id, exists := c.GetQuery("count")
-	if !exists {
+	id := c.Param("id")
+	if id == "" {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
 			"error": "id is null",
@@ -91,10 +92,8 @@ func (uc *MovieController) GetMovieByID(c *gin.Context) {
 	idUint64, _ := strconv.ParseUint(id, 10, 64)
 	movie, err := uc.getMovieController().Service.FindMovieById(idUint64)
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
-			"error": err,
-		})
+		util.SendError(c, err.Error())
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{

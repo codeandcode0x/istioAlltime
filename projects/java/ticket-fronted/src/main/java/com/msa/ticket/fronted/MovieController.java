@@ -1,12 +1,13 @@
 package com.msa.ticket.fronted;
 
-import com.msa.ticket.fronted.model.Movie;
 import com.msa.ticket.fronted.pojo.MovieData;
+import com.msa.ticket.fronted.pojo.MovieDatas;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestClientException;
@@ -27,7 +28,7 @@ public class MovieController {
         var url = "http://127.0.0.1:8081/api/movies?count="+count;
 
         RestTemplate restTemplate = new RestTemplate();
-        MovieData movies = restTemplate.getForObject(url, MovieData.class);
+        MovieDatas movies = restTemplate.getForObject(url, MovieDatas.class);
         System.out.println(movies);
 
         assert movies != null;
@@ -41,7 +42,7 @@ public class MovieController {
         String url = "http://127.0.0.1:8081/api/movies";
 
         RestTemplate restTemplate = new RestTemplate();
-        MovieData movies = restTemplate.getForObject(url, MovieData.class);
+        MovieDatas movies = restTemplate.getForObject(url, MovieDatas.class);
         System.out.println(movies);
 
         assert movies != null;
@@ -49,9 +50,9 @@ public class MovieController {
         return "movies";
     }
 
-    @GetMapping("/detail")
-    public String GetDetail(@RequestParam(name="id", required = false, defaultValue = "1") Integer id, Model model) {
-        var url = "http://127.0.0.1:8081/api/movie/="+id;
+    @GetMapping("/detail/{id}")
+    public String GetDetail(@PathVariable Long id, Model model) {
+        var url = "http://127.0.0.1:8081/api/movie/"+id;
 
         RestTemplate restTemplate = new RestTemplate();
         MovieData movie = restTemplate.getForObject(url, MovieData.class);
