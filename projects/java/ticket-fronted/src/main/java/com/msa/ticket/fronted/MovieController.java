@@ -25,7 +25,7 @@ public class MovieController {
 
     @GetMapping("/")
     public String Home(@RequestParam(name="count", required = false, defaultValue = "3") Integer count, Model model) {
-        var url = "http://127.0.0.1:8081/api/movies?count="+count;
+        String url = "http://127.0.0.1:8081/api/movies?count="+count;
 
         RestTemplate restTemplate = new RestTemplate();
         MovieDatas movies = restTemplate.getForObject(url, MovieDatas.class);
@@ -52,7 +52,7 @@ public class MovieController {
 
     @GetMapping("/detail/{id}")
     public String GetDetail(@PathVariable Long id, Model model) {
-        var url = "http://127.0.0.1:8081/api/movie/"+id;
+        String url = "http://127.0.0.1:8081/api/movie/"+id;
 
         RestTemplate restTemplate = new RestTemplate();
         MovieData movie = restTemplate.getForObject(url, MovieData.class);
