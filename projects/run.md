@@ -14,3 +14,6 @@ docker run -p 8080:8080  --name ticket-manager -d roandocker/ticket-manager:0.0.
 ## run
 
 docker-compose -f docker-compose.yml -p ticket up
+
+## go module off
+GO111MODULE=off go get -v github.com/swaggo/swag/cmd/swag
