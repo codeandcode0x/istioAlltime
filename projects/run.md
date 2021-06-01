@@ -17,3 +17,14 @@ docker-compose -f docker-compose.yml -p ticket up
 
 ## go module off
 GO111MODULE=off go get -v github.com/swaggo/swag/cmd/swag
+
+
+## grpc
+```
+protoc -I ${protoDir}/ ${protoDir}/*proto --go_out=plugins=grpc:${outDir}
+
+```
+
+example:
+
+protoc -I rpc/grpc/protos/movie/ rpc/grpc/protos/movie/*proto --go_out=plugins=grpc:rpc/grpc/service/movie
