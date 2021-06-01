@@ -51,7 +51,7 @@ services:
     image: roandocker/ticket-frontend:0.0.1
     command: /bin/sh -c "java -jar /root/ticket-frontend.jar"
     ports:
-      - 8080:8080
+      - 8090:8090
     environment:
       DB_HOST: mariadb
     restart: always

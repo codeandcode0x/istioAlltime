@@ -39,7 +39,7 @@ public class MovieController {
 
     @GetMapping("/movies")
     public String GetMovies(@RequestParam(name="name", required = false, defaultValue = "ethan") String name, Model model) {
-        String url = "http://127.0.0.1:8081/api/movies";
+        String url = "http://127.0.0.1:8080/api/movies";
 
         RestTemplate restTemplate = new RestTemplate();
         MovieDatas movies = restTemplate.getForObject(url, MovieDatas.class);
@@ -79,7 +79,7 @@ public class MovieController {
     }
 
     public void  getMovies(HttpServletResponse response, Integer userId) throws Exception{
-        String url = "http://127.0.0.1:8081/api/movies";
+        String url = "http://127.0.0.1:8080/api/movies";
         HttpHeaders headers = new HttpHeaders();
         //定义请求参数类型，这里用json所以是MediaType.APPLICATION_JSON
         headers.setContentType(MediaType.APPLICATION_JSON);
