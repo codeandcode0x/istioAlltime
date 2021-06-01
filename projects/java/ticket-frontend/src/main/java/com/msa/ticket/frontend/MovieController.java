@@ -1,7 +1,7 @@
-package com.msa.ticket.fronted;
+package com.msa.ticket.frontend;
 
-import com.msa.ticket.fronted.pojo.MovieData;
-import com.msa.ticket.fronted.pojo.MovieDatas;
+import com.msa.ticket.frontend.pojo.MovieData;
+import com.msa.ticket.frontend.pojo.MovieDatas;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;

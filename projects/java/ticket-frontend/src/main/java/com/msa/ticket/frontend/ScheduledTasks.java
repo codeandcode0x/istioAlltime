@@ -1,4 +1,4 @@
-package com.msa.ticket.fronted;
+package com.msa.ticket.frontend;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

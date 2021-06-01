@@ -1,4 +1,4 @@
-package com.msa.ticket.fronted;
+package com.msa.ticket.frontend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

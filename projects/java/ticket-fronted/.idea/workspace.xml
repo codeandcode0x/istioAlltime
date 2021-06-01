@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2e0ab3f5-40b5-41a1-a691-3f488778f4b9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../docker/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_docker/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/msa/ticket/fronted/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/msa/ticket/fronted/MovieController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/msa/ticket/fronted/ScheduledTasks.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/msa/ticket/fronted/model/Movie.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/msa/ticket/fronted/pojo/MovieData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/msa/ticket/fronted/pojo/MovieDatas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/bootstrap-theme.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/bootstrap-theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/bootstrap-theme.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/1(1).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/animate.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/banner-side.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/blank.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/blog_big_01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/blog_big_02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/blog_big_03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/blue.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/bootstrap-hover-dropdown.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/bootstrap-select.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/bootstrap-select.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/bootstrap-slider.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/css(1)" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/css(2)" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/css(3)" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/echo.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/font-awesome.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/home-banner.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/home-banner1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/home-banner2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/home-banner3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/home-banner4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/jquery-1.11.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/jquery.easing-1.3.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/jquery.rateit.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/lightbox.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/member1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/member2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/member3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/owl.carousel.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/owl.carousel.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/owl.transitions.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p10_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p11_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p12_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p13(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p13_hover(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p13_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p14(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p14.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p14_hover(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p14_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p15(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p15.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p15_hover(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p15_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p1_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p2_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p3_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p4_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p5_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p6_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p7_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p8_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/p9_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/rateit.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/scripts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/top-menu-banner.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/top-menu-banner1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/translate_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/translateelement.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index/wow.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/npm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/1(1).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/7moorInit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/896beb70-d81a-11e7-b6e7-9da891414b0f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/QiMoIMSDK-d2f1c90ef3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/ad3_728x90.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/agentLogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/animate.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/banner-side.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/big.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/blank.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/blog_big_01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/blog_big_02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/blog_big_03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/blue.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/bootstrap-hover-dropdown.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/bootstrap-select.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/bootstrap-select.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/bootstrap-slider.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/brand1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/brand2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/brand3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/brand4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/brand5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/brand6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/chatStyle-6da16ba661.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/close-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/continue-advisory.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/cookie.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/core.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/css(1)" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/css(2)" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/css(3)" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/distpicker.data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/distpicker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/dmaku.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/echo.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/font-awesome.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/hm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/home-banner.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/home-banner1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/home-banner2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/home-banner3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/home-banner4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/icon-tip1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/iconfont.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/idangerous_swiper-9998bd2b30.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/idangerous_swiper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/invite-close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/jdate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/jquery-1.11.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/jquery.easing-1.3.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/jquery.rateit.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/left_float_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/lightbox.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/m7AllQuote.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/member1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/member2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/member3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/modernizr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/moor_chat.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/moor_style-560e158992.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/online" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/online(1)" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/owl.carousel.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/owl.carousel.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/owl.transitions.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p10_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p11_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p12_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p13(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p13_hover(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p13_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p14(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p14.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p14_hover(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p14_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p15(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p15.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p15_hover(1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p15_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p1_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p2_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p3_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p4_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p5_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p6_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p7_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p8_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/p9_hover.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/quick-login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/rateit.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/right_float_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/saved_resource(1).html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/saved_resource.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/scripts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/service" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/tj.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/top-menu-banner.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/top-menu-banner1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/uba.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/video-invite.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/wow.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/ticket/z_stat.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error-404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error-500.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/movies.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/msa/ticket/fronted/ApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../run.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../run.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="1tG85O38nN20tZlpqMH2wpjnc61" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/templates" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ticket.frontend" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="ticket.frontend" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="ticket.frontend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.msa.ticket.frontend.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2e0ab3f5-40b5-41a1-a691-3f488778f4b9" name="Default Changelist" comment="" />
+      <created>1622383881632</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622383881632</updated>
+      <workItem from="1622383885688" duration="17287000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="691" y="260" key="#com.intellij.ide.util.MemberChooser" timestamp="1622471672146">
+      <screen x="0" y="25" width="1755" height="1095" />
+    </state>
+    <state x="691" y="260" key="#com.intellij.ide.util.MemberChooser/0.25.1755.1095@0.25.1755.1095" timestamp="1622471672146" />
+    <state x="691" y="260" key="#com.intellij.ide.util.MemberChooser/0.25.1756.1095@0.25.1756.1095" timestamp="1622418108244" />
+    <state x="616" y="323" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1622418040379">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state x="616" y="323" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1756.1095@0.25.1756.1095" timestamp="1622418040379" />
+    <state width="1714" height="364" key="GridCell.Tab.0.bottom" timestamp="1622523998898">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state width="1714" height="364" key="GridCell.Tab.0.bottom/0.25.1755.1095@0.25.1755.1095" timestamp="1622522685718" />
+    <state width="1714" height="364" key="GridCell.Tab.0.bottom/0.25.1756.1095@0.25.1756.1095" timestamp="1622523998898" />
+    <state width="1714" height="364" key="GridCell.Tab.0.center" timestamp="1622523998898">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state width="1714" height="364" key="GridCell.Tab.0.center/0.25.1755.1095@0.25.1755.1095" timestamp="1622522685718" />
+    <state width="1714" height="364" key="GridCell.Tab.0.center/0.25.1756.1095@0.25.1756.1095" timestamp="1622523998898" />
+    <state width="1714" height="364" key="GridCell.Tab.0.left" timestamp="1622523998898">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state width="1714" height="364" key="GridCell.Tab.0.left/0.25.1755.1095@0.25.1755.1095" timestamp="1622522685717" />
+    <state width="1714" height="364" key="GridCell.Tab.0.left/0.25.1756.1095@0.25.1756.1095" timestamp="1622523998898" />
+    <state width="1714" height="364" key="GridCell.Tab.0.right" timestamp="1622523998898">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state width="1714" height="364" key="GridCell.Tab.0.right/0.25.1755.1095@0.25.1755.1095" timestamp="1622522685718" />
+    <state width="1714" height="364" key="GridCell.Tab.0.right/0.25.1756.1095@0.25.1756.1095" timestamp="1622523998898" />
+    <state width="1714" height="364" key="GridCell.Tab.1.bottom" timestamp="1622523998900">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state width="1714" height="364" key="GridCell.Tab.1.bottom/0.25.1755.1095@0.25.1755.1095" timestamp="1622522685719" />
+    <state width="1714" height="364" key="GridCell.Tab.1.bottom/0.25.1756.1095@0.25.1756.1095" timestamp="1622523998900" />
+    <state width="1714" height="364" key="GridCell.Tab.1.center" timestamp="1622523998899">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state width="1714" height="364" key="GridCell.Tab.1.center/0.25.1755.1095@0.25.1755.1095" timestamp="1622522685719" />
+    <state width="1714" height="364" key="GridCell.Tab.1.center/0.25.1756.1095@0.25.1756.1095" timestamp="1622523998899" />
+    <state width="1714" height="364" key="GridCell.Tab.1.left" timestamp="1622523998899">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state width="1714" height="364" key="GridCell.Tab.1.left/0.25.1755.1095@0.25.1755.1095" timestamp="1622522685719" />
+    <state width="1714" height="364" key="GridCell.Tab.1.left/0.25.1756.1095@0.25.1756.1095" timestamp="1622523998899" />
+    <state width="1714" height="364" key="GridCell.Tab.1.right" timestamp="1622523998899">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state width="1714" height="364" key="GridCell.Tab.1.right/0.25.1755.1095@0.25.1755.1095" timestamp="1622522685719" />
+    <state width="1714" height="364" key="GridCell.Tab.1.right/0.25.1756.1095@0.25.1756.1095" timestamp="1622523998899" />
+    <state x="616" y="325" key="extract.method.dialog" timestamp="1622419036501">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state x="616" y="325" key="extract.method.dialog/0.25.1756.1095@0.25.1756.1095" timestamp="1622419036501" />
+    <state x="579" y="298" width="597" height="548" key="find.popup" timestamp="1622384066366">
+      <screen x="0" y="25" width="1756" height="1095" />
+    </state>
+    <state x="579" y="298" width="597" height="548" key="find.popup/0.25.1756.1095@0.25.1756.1095" timestamp="1622384066366" />
+  </component>
+</project>

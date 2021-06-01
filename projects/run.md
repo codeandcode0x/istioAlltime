@@ -10,3 +10,7 @@ docker run -p 127.0.0.1:3306:3306  --name mariadb -e MARIADB_ROOT_PASSWORD=root1
 
 ## backend
 docker run -p 8080:8080  --name ticket-manager -d roandocker/ticket-manager:0.0.1
+
+## run
+
+docker-compose -f docker-compose.yml -p ticket up

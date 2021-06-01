@@ -28,7 +28,7 @@ services:
       INTERVAL_TIME: "5"
     restart: on-failure
 
-  ticker-manager:
+  ticket-manager:
     depends_on:
     - initdata-job
     image: roandocker/ticket-manager:0.0.1
@@ -42,6 +42,18 @@ services:
       DB_PASSWD: root123
       DB_DATABASE: ticket
       DB_LOGMODE: "true"
+    restart: always
+
+  ticket-fronted:
+    depends_on:
+    - initdata-job
+    - ticket-manager
+    image: roandocker/ticket-frontend:0.0.1
+    command: /bin/sh -c "java -jar /root/ticket-frontend.jar"
+    ports:
+      - 8090:8090
+    environment:
+      DB_HOST: mariadb
     restart: always
 
 

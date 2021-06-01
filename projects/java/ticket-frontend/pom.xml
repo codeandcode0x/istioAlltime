@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.msa</groupId>
-	<artifactId>ticket.fronted</artifactId>
+	<artifactId>ticket.frontend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ticket.fronted</name>
-	<description>ticket fronted</description>
+	<name>ticket.frontend</name>
+	<description>ticket frontend</description>
 	<properties>
 		<java.version>8</java.version>
 	</properties>

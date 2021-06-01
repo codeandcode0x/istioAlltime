@@ -1,6 +1,6 @@
-package com.msa.ticket.fronted.pojo;
+package com.msa.ticket.frontend.pojo;
 
-import com.msa.ticket.fronted.model.Movie;
+import com.msa.ticket.frontend.model.Movie;
 
 import java.util.List;
 

@@ -8,18 +8,18 @@ WORKDIR /opt/app/
 
 RUN apt-get install git && \
 	git clone https://github.com/codeandcode0x/istioAlltime.git && \
-	cd istioAlltime/projects/java/ticket-fronted/ && \
+	cd istioAlltime/projects/java/ticket-frontend/ && \
 	mvn clean install && \
-	cp target/ticket.fronted-0.0.1-SNAPSHOT.jar  /opt/app/ticket-fronted.jar
+	cp target/ticket.frontend-0.0.1-SNAPSHOT.jar  /opt/app/ticket-frontend.jar
 
 
 FROM openjdk:8-jdk-oraclelinux7 as prod
 
 WORKDIR /root/
 
-COPY --from=0 /opt/app/ticket-fronted.jar /root
+COPY --from=0 /opt/app/ticket-frontend.jar /root
 
 RUN ls -all
-RUN chmod 777 ticket-fronted.jar
+RUN chmod 777 ticket-frontend.jar
 
-CMD ["java -jar /root/ticket-fronted.jar"]
+CMD ["java -jar /root/ticket-frontend.jar"]

@@ -1,4 +1,4 @@
-package com.msa.ticket.fronted.model;
+package com.msa.ticket.frontend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -1,4 +1,4 @@
-package com.msa.ticket.fronted;
+package com.msa.ticket.frontend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
