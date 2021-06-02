@@ -1,10 +1,16 @@
 package route
 
 import (
+	"github.com/gin-contrib/timeout"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"ticket-manager/controller"
 	"ticket-manager/middleware"
+	"time"
+)
+
+const (
+	TimeDuration = 500
 )
 
 func DefinitionRoute(router *gin.Engine) {
@@ -12,6 +18,7 @@ func DefinitionRoute(router *gin.Engine) {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.Use(middleware.UseCookieSession())
+	//router.Use(DurationMiddleware())
 	// no route
 	router.NoRoute(NoRouteResponse)
 	// home
@@ -49,8 +56,8 @@ func DefinitionRoute(router *gin.Engine) {
 	}
 
 	// api
-	api := router.Group("/api")
-	api.GET("/movies", movieController.GetAllMovies)
+	api := router.Group("/api", middleware.TimeoutMiddleware(5*time.Second))
+	api.GET("/movies", middleware.TimedHandler(5*time.Second) , movieController.GetAllMovies)
 	api.GET("/movie/:id", movieController.GetMovieByID)
 
 }
@@ -64,3 +71,10 @@ func NoRouteResponse(c *gin.Context) {
 }
 
 
+func DurationMiddleware() gin.HandlerFunc {
+	return timeout.New(timeout.WithTimeout(300*time.Microsecond),
+		timeout.WithHandler(func(context *gin.Context) {
+			time.Sleep(200 * time.Microsecond)
+			context.String(http.StatusOK, "")
+		}))
+}

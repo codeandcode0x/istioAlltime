@@ -9,6 +9,7 @@ import (
 	"ticket-manager/model"
 	"ticket-manager/service"
 	"ticket-manager/util"
+	"time"
 )
 
 type MovieController struct {
@@ -58,6 +59,7 @@ func (uc *MovieController) CreateMovie(c *gin.Context) {
 func (uc *MovieController) GetAllMovies(c *gin.Context) {
 	// var movies []model.Movie{}
 	// var err error
+	time.Sleep(2*time.Second)
 	count := 10
 	countStr, exists := c.GetQuery("count")
 	if exists {

@@ -27,4 +27,4 @@ protoc -I ${protoDir}/ ${protoDir}/*proto --go_out=plugins=grpc:${outDir}
 
 example:
 
-protoc -I rpc/grpc/protos/movie/ rpc/grpc/protos/movie/*proto --go_out=plugins=grpc:rpc/grpc/service/movie
+protoc -I rpc/grpc/protos/movie/ rpc/grpc/protos/movie/*proto --go_out=plugins=grpc:rpc/grpc/protos/movie

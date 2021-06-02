@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"net"
@@ -13,7 +14,6 @@ import (
 	user "ticket-manager/rpc/grpc/protos/user"
 	movieRpc "ticket-manager/rpc/grpc/service/movie"
 	userRpc "ticket-manager/rpc/grpc/service/user"
-	"golang.org/x/sync/errgroup"
 )
 
 var (
@@ -21,23 +21,15 @@ var (
 )
 
 func main() {
-
 	r := gin.Default()
-	//s := &http.Server{
-	//	Addr:           ":8080",
-	//	Handler:        r,
-	//	ReadTimeout:    10 * time.Second,
-	//	WriteTimeout:   10 * time.Second,
-	//	MaxHeaderBytes: 1 << 20,
-	//}
 	route.DefinitionRoute(r)
-
+	// rpc goroutine
 	g.Go(func() error {
 		RpcServer()
 		return nil
 	})
 
-	endless.ListenAndServe(":8080", r)
+	endless.ListenAndServe(":8081", r)
 }
 
 

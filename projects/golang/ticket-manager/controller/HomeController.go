@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"ticket-manager/middleware"
 	"ticket-manager/service"
+	"time"
+
 	// "fmt"
 )
 
@@ -62,6 +64,7 @@ func (hc *HomeController) Logout(c *gin.Context) {
 
 
 func (hc *HomeController) ProxyHome(c *gin.Context) {
+	time.Sleep(time.Second * 2)
 	var us *service.UserService
 	var ms *service.MovieService
 	users, errUsers := us.FindAllUsers()
