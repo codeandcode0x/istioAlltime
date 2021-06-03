@@ -2,18 +2,19 @@ package controller
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 	"net/http"
 	"strconv"
 	"ticket-manager/model"
 	"ticket-manager/service"
 	"ticket-manager/util"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 type MovieController struct {
-	apiVersion  string
+	apiVersion string
 	Service    *service.MovieService
 }
 
@@ -33,25 +34,25 @@ func (uc *MovieController) CreateMovie(c *gin.Context) {
 	mtime := c.PostForm("mtime")
 	//mtype, _ :=  strconv.Atoi(c.PostForm("age"))
 	movie := &model.Movie{
-		Name:       name,
-		Image:      image,
-		Actors:     actors,
-		Mtype:      mtype,
-		Minfo:      minfo,
-		Mtime:      mtime,
-		Model:      gorm.Model{},
+		Name:   name,
+		Image:  image,
+		Actors: actors,
+		Mtype:  mtype,
+		Minfo:  minfo,
+		Mtime:  mtime,
+		Model:  gorm.Model{},
 	}
 	movieId, err := uc.getMovieController().Service.CreateMovie(movie)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
+			"code":  -1,
 			"error": err,
 		})
 	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 0,
-		"id": movieId,
+		"id":   movieId,
 		"data": movie,
 	})
 }
@@ -59,7 +60,7 @@ func (uc *MovieController) CreateMovie(c *gin.Context) {
 func (uc *MovieController) GetAllMovies(c *gin.Context) {
 	// var movies []model.Movie{}
 	// var err error
-	time.Sleep(2*time.Second)
+	time.Sleep(2 * time.Second)
 	count := 10
 	countStr, exists := c.GetQuery("count")
 	if exists {
@@ -69,7 +70,7 @@ func (uc *MovieController) GetAllMovies(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
+			"code":  -1,
 			"error": err,
 		})
 	}
@@ -80,12 +81,11 @@ func (uc *MovieController) GetAllMovies(c *gin.Context) {
 	})
 }
 
-
 func (uc *MovieController) GetMovieByID(c *gin.Context) {
 	id := c.Param("id")
 	if id == "" {
 		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
+			"code":  -1,
 			"error": "id is null",
 		})
 		return
@@ -109,7 +109,7 @@ func (uc *MovieController) UpdateMovie(c *gin.Context) {
 	uid, exists := c.GetPostForm("id")
 	if !exists {
 		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
+			"code":  -1,
 			"error": "id is null",
 		})
 	}
@@ -141,7 +141,7 @@ func (uc *MovieController) UpdateMovie(c *gin.Context) {
 	rowsAffected, updateErr := uc.getMovieController().Service.UpdateMovie(uid_unit64, movie)
 	if updateErr != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
+			"code":  -1,
 			"error": updateErr,
 		})
 	}
@@ -156,7 +156,7 @@ func (uc *MovieController) DeleteMovie(c *gin.Context) {
 	uid, exists := c.GetPostForm("id")
 	if !exists {
 		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
+			"code":  -1,
 			"error": "id is null",
 		})
 	}
@@ -170,7 +170,7 @@ func (uc *MovieController) DeleteMovie(c *gin.Context) {
 
 	if delErr != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
+			"code":  -1,
 			"error": "delete movie error",
 		})
 	}

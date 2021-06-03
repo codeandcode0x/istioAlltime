@@ -2,11 +2,12 @@ package middleware
 
 import (
 	//"github.com/gin-contrib/timeout"
-	"github.com/gin-gonic/gin"
-	"golang.org/x/net/context"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"golang.org/x/net/context"
 )
 
 func TimeoutMiddleware(timeout time.Duration) func(c *gin.Context) {
@@ -36,22 +37,38 @@ func TimeoutMiddleware(timeout time.Duration) func(c *gin.Context) {
 		//
 		//	return
 		//}
-
+		ch := make(chan int, 1)
 		ctx, cancel := context.WithTimeout(c.Request.Context(), timeout)
 
-		defer func() {
+		defer func(c *gin.Context) {
 			if ctx.Err() == context.DeadlineExceeded {
-				log.Println("request timeout :"+ ctx.Err().Error())
-				c.Writer.WriteHeader(http.StatusGatewayTimeout)
-				c.Abort()
+				log.Println("request timeout1 .... :" + ctx.Err().Error())
+				ch <- 1
 			}
 			cancel()
-		}()
-		c.Request = c.Request.WithContext(ctx)
-		c.Next()
+			log.Println("request timeout2 .... :")
+		}(c)
+
+		for {
+			select {
+			case result := <-ch:
+				log.Println("request timeout3 .... :", result)
+				c.Writer.WriteHeader(http.StatusGatewayTimeout)
+				c.JSON(http.StatusGatewayTimeout, gin.H{
+					"code":  http.StatusGatewayTimeout,
+					"error": "request timeout",
+				})
+				c.Abort()
+				return
+				// case <-ctx.Done():
+				// 	c.Request = c.Request.WithContext(ctx)
+				// 	c.Next()
+				// 	log.Println("request timeout4 .... :")
+				// 	return
+			}
+		}
 	}
 }
-
 
 func TimedHandler(duration time.Duration) func(c *gin.Context) {
 	return func(c *gin.Context) {
@@ -75,8 +92,8 @@ func TimedHandler(duration time.Duration) func(c *gin.Context) {
 			time.Sleep(duration)
 			doneChan <- responseData{
 				status: 200,
-				body:   gin.H{
-					"code": http.StatusGatewayTimeout,
+				body: gin.H{
+					"code":  http.StatusGatewayTimeout,
 					"error": "request timeout",
 				},
 			}
