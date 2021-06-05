@@ -3,17 +3,18 @@ package main
 
 import (
 	"fmt"
-	"github.com/fvbock/endless"
-	"github.com/gin-gonic/gin"
-	"golang.org/x/sync/errgroup"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 	"net"
 	"ticket-manager/route"
 	movie "ticket-manager/rpc/grpc/protos/movie"
 	user "ticket-manager/rpc/grpc/protos/user"
 	movieRpc "ticket-manager/rpc/grpc/service/movie"
 	userRpc "ticket-manager/rpc/grpc/service/user"
+
+	"github.com/fvbock/endless"
+	"github.com/gin-gonic/gin"
+	"golang.org/x/sync/errgroup"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 var (
@@ -29,9 +30,18 @@ func main() {
 		return nil
 	})
 
-	endless.ListenAndServe(":8081", r)
-}
+	endless.ListenAndServe(":8080", r)
 
+	// s := &http.Server{
+	// 	Addr:           ":8080",
+	// 	Handler:        http.TimeoutHandler(r, time.Second*5, ""),
+	// 	ReadTimeout:    10 * time.Second,
+	// 	WriteTimeout:   10 * time.Second,
+	// 	MaxHeaderBytes: 1 << 20,
+	// }
+	// s.ListenAndServe()
+
+}
 
 func RpcServer() {
 	lis, err := net.Listen("tcp", ":20153")
@@ -51,9 +61,3 @@ func RpcServer() {
 		return
 	}
 }
-
-
-
-
-
-

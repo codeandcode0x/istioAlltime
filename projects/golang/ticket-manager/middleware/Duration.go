@@ -1,120 +1,64 @@
 package middleware
 
 import (
-	//"github.com/gin-contrib/timeout"
-	"log"
+	"bytes"
+	"context"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"golang.org/x/net/context"
+	"github.com/vearne/golib/buffpool"
 )
 
-func TimeoutMiddleware(timeout time.Duration) func(c *gin.Context) {
+type GinWriter struct {
+	gin.ResponseWriter
+	body *bytes.Buffer
+}
+
+func (w GinWriter) Write(b []byte) (int, error) {
+	return w.body.Write(b)
+}
+
+// time out mid
+func TimeoutHandler(t time.Duration) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		//ch := make(chan int)
-		//ctx, cancel := context.WithTimeout(c.Request.Context(), timeout)
-		//go func(ctx context.Context) {
-		//	if ctx.Err() == context.DeadlineExceeded {
-		//		log.Println("request timeout :"+ ctx.Err().Error())
-		//		c.Writer.WriteHeader(http.StatusGatewayTimeout)
-		//		ch <- 1
-		//	}
-		//}(ctx)
-		//
-		//select {
-		//case status:= <-ch:
-		//	log.Println("request timeout2 .....", status)
-		//	c.JSON(http.StatusGatewayTimeout,  gin.H{
-		//		"code": http.StatusGatewayTimeout,
-		//		"error": "request timeout",
-		//	})
-		//	c.Request = c.Request.WithContext(ctx)
-		//	c.Next()
-		//	c.Abort()
-		//case <-ctx.Done():
-		//	cancel()
-		//
-		//	return
-		//}
-		ch := make(chan int, 1)
-		ctx, cancel := context.WithTimeout(c.Request.Context(), timeout)
+		buffer := buffpool.GetBuff()
+		blw := &GinWriter{body: buffer, ResponseWriter: c.Writer}
+		c.Writer = blw
+		finish := make(chan struct{})
 
-		defer func(c *gin.Context) {
-			if ctx.Err() == context.DeadlineExceeded {
-				log.Println("request timeout1 .... :" + ctx.Err().Error())
-				ch <- 1
-			}
-			cancel()
-			log.Println("request timeout2 .... :")
-		}(c)
+		go func() {
+			c.Next()
+			finish <- struct{}{}
+		}()
 
-		for {
-			select {
-			case result := <-ch:
-				log.Println("request timeout3 .... :", result)
-				c.Writer.WriteHeader(http.StatusGatewayTimeout)
-				c.JSON(http.StatusGatewayTimeout, gin.H{
-					"code":  http.StatusGatewayTimeout,
-					"error": "request timeout",
-				})
-				c.Abort()
-				return
-				// case <-ctx.Done():
-				// 	c.Request = c.Request.WithContext(ctx)
-				// 	c.Next()
-				// 	log.Println("request timeout4 .... :")
-				// 	return
-			}
+		select {
+		case <-time.After(t):
+			c.Writer.WriteHeader(http.StatusGatewayTimeout)
+			c.Set("errorCode", http.StatusGatewayTimeout)
+			c.Abort()
+			return
+		case <-finish:
+			blw.ResponseWriter.Write(buffer.Bytes())
+			buffpool.PutBuff(buffer)
 		}
 	}
 }
 
-func TimedHandler(duration time.Duration) func(c *gin.Context) {
-	return func(c *gin.Context) {
-
-		// get the underlying request context
-		ctx := c.Request.Context()
-
-		// create the response data type to use as a channel type
-		type responseData struct {
-			status int
-			body   map[string]interface{}
-		}
-
-		// create a done channel to tell the request it's done
-		doneChan := make(chan responseData)
-
-		// here you put the actual work needed for the request
-		// and then send the doneChan with the status and body
-		// to finish the request by writing the response
-		go func() {
-			time.Sleep(duration)
-			doneChan <- responseData{
-				status: 200,
-				body: gin.H{
-					"code":  http.StatusGatewayTimeout,
-					"error": "request timeout",
-				},
-			}
-		}()
-
-		// non-blocking select on two channels see if the request
-		// times out or finishes
+// request job
+func requestJob(ctx context.Context, c *gin.Context, structChan chan struct{}) {
+	ch := make(chan bool, 1)
+	go func(ctx context.Context) {
 		select {
-
-		// if the context is done it timed out or was cancelled
-		// so don't return anything
 		case <-ctx.Done():
-			return
-
-			// if the request finished then finish the request by
-			// writing the response
-		case res := <-doneChan:
-			c.Writer.WriteHeader(http.StatusGatewayTimeout)
-			c.JSON(res.status, res.body)
-			c.Abort()
-			return
+			ch <- true
 		}
+		ch <- false
+	}(ctx)
+	c.Next()
+	structChan <- struct{}{}
+	if <-ch {
+		c.Abort()
+		return
 	}
 }

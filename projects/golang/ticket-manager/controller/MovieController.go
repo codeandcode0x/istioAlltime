@@ -7,7 +7,6 @@ import (
 	"ticket-manager/model"
 	"ticket-manager/service"
 	"ticket-manager/util"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -16,12 +15,17 @@ import (
 type MovieController struct {
 	apiVersion string
 	Service    *service.MovieService
+	ErrorCode  error
 }
 
 // get controller
-func (uc *MovieController) getMovieController() *MovieController {
+func (uc *MovieController) getMovieController(c *gin.Context) *MovieController {
+	errorCode, _ := c.Get("errorCode")
+	if errorCode == http.StatusGatewayTimeout {
+		return nil
+	}
 	var svc *service.MovieService
-	return &MovieController{"v1", svc}
+	return &MovieController{"v1", svc, nil}
 }
 
 // create Movie
@@ -42,7 +46,12 @@ func (uc *MovieController) CreateMovie(c *gin.Context) {
 		Mtime:  mtime,
 		Model:  gorm.Model{},
 	}
-	movieId, err := uc.getMovieController().Service.CreateMovie(movie)
+
+	// return error
+	if uc.getMovieController(c) == nil {
+		return
+	}
+	movieId, err := uc.getMovieController(c).Service.CreateMovie(movie)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,
@@ -58,15 +67,16 @@ func (uc *MovieController) CreateMovie(c *gin.Context) {
 }
 
 func (uc *MovieController) GetAllMovies(c *gin.Context) {
-	// var movies []model.Movie{}
-	// var err error
-	time.Sleep(2 * time.Second)
 	count := 10
 	countStr, exists := c.GetQuery("count")
 	if exists {
 		count, _ = strconv.Atoi(countStr)
 	}
-	movies, err := uc.getMovieController().Service.FindAllMovies(count)
+	// return error
+	if uc.getMovieController(c) == nil {
+		return
+	}
+	movies, err := uc.getMovieController(c).Service.FindAllMovies(count)
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
@@ -92,7 +102,13 @@ func (uc *MovieController) GetMovieByID(c *gin.Context) {
 	}
 
 	idUint64, _ := strconv.ParseUint(id, 10, 64)
-	movie, err := uc.getMovieController().Service.FindMovieById(idUint64)
+
+	// return error
+	if uc.getMovieController(c) == nil {
+		return
+	}
+
+	movie, err := uc.getMovieController(c).Service.FindMovieById(idUint64)
 	if err != nil {
 		util.SendError(c, err.Error())
 		return
@@ -119,7 +135,11 @@ func (uc *MovieController) UpdateMovie(c *gin.Context) {
 		panic(" get uid error !")
 	}
 
-	movie, err := uc.getMovieController().Service.FindMovieById(uid_unit64)
+	// return error
+	if uc.getMovieController(c) == nil {
+		return
+	}
+	movie, err := uc.getMovieController(c).Service.FindMovieById(uid_unit64)
 	if err != nil {
 		panic(" get Movie error !")
 	}
@@ -138,7 +158,12 @@ func (uc *MovieController) UpdateMovie(c *gin.Context) {
 	movie.Minfo = minfo
 	movie.Mtime = mtime
 
-	rowsAffected, updateErr := uc.getMovieController().Service.UpdateMovie(uid_unit64, movie)
+	// return error
+	if uc.getMovieController(c) == nil {
+		return
+	}
+
+	rowsAffected, updateErr := uc.getMovieController(c).Service.UpdateMovie(uid_unit64, movie)
 	if updateErr != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,
@@ -166,7 +191,12 @@ func (uc *MovieController) DeleteMovie(c *gin.Context) {
 		panic(" get uid error !")
 	}
 
-	rowsAffected, delErr := uc.getMovieController().Service.DeleteMovie(uid_unit64)
+	// return error
+	if uc.getMovieController(c) == nil {
+		return
+	}
+
+	rowsAffected, delErr := uc.getMovieController(c).Service.DeleteMovie(uid_unit64)
 
 	if delErr != nil {
 		c.JSON(http.StatusOK, gin.H{

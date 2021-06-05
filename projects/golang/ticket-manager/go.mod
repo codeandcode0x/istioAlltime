@@ -8,9 +8,10 @@ require (
 	github.com/gin-contrib/timeout v0.0.1
 	github.com/gin-gonic/gin v1.7.1
 	github.com/spf13/viper v1.7.1
+	github.com/vearne/golib v0.1.4
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
-	golang.org/x/net v0.0.0-20190620200207-3b0461eec859
-	golang.org/x/sync v0.0.0-20190423024810-112230192c58
+	golang.org/x/net v0.0.0-20201202161906-c7110b5ffcbb
+	golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9
 	google.golang.org/grpc v1.38.0
 	google.golang.org/protobuf v1.26.0
 	gorm.io/driver/mysql v1.1.0
