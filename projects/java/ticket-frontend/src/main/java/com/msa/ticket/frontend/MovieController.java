@@ -22,10 +22,12 @@ import java.util.Map;
 public class MovieController {
     @Autowired
     private RestTemplate restTemplate ;
+    // private String ticketHost = "ticket-manager:8080";
+    private String ticketHost = "http://localhost:8080";
 
     @GetMapping("/")
     public String Home(@RequestParam(name="count", required = false, defaultValue = "3") Integer count, Model model) {
-        String url = "http://ticket-manager:8080/api/movies?count="+count;
+        String url = ticketHost+"/api/movies?count="+count;
 
         RestTemplate restTemplate = new RestTemplate();
         MovieDatas movies = restTemplate.getForObject(url, MovieDatas.class);
@@ -39,7 +41,7 @@ public class MovieController {
 
     @GetMapping("/movies")
     public String GetMovies(@RequestParam(name="name", required = false, defaultValue = "ethan") String name, Model model) {
-        String url = "http://ticket-manager:8080/api/movies";
+        String url = ticketHost+"/api/movies";
 
         RestTemplate restTemplate = new RestTemplate();
         MovieDatas movies = restTemplate.getForObject(url, MovieDatas.class);
@@ -52,7 +54,7 @@ public class MovieController {
 
     @GetMapping("/detail/{id}")
     public String GetDetail(@PathVariable Long id, Model model) {
-        String url = "http://ticket-manager:8080/api/movie/"+id;
+        String url = ticketHost+"/api/movie/"+id;
 
         RestTemplate restTemplate = new RestTemplate();
         MovieData movie = restTemplate.getForObject(url, MovieData.class);
@@ -79,7 +81,7 @@ public class MovieController {
     }
 
     public void  getMovies(HttpServletResponse response, Integer userId) throws Exception{
-        String url = "http://ticket-manager:8080/api/movies";
+        String url = ticketHost+"/api/movies";
         HttpHeaders headers = new HttpHeaders();
         //定义请求参数类型，这里用json所以是MediaType.APPLICATION_JSON
         headers.setContentType(MediaType.APPLICATION_JSON);

@@ -6,7 +6,7 @@ import (
 )
 
 type MovieService struct {
-	Model  *model.Movie
+	Model *model.Movie
 }
 
 // get Movie service
@@ -31,7 +31,7 @@ func (u *MovieService) CreateMovie(Movie *model.Movie) (uint64, error) {
 }
 
 // update Movie
-func (u *MovieService) UpdateMovie(uid uint64, Movie *model.Movie ) (int64, error) {
+func (u *MovieService) UpdateMovie(uid uint64, Movie *model.Movie) (int64, error) {
 	rowsAffected, err := u.getMovieService().Model.Update(uid, Movie)
 	return rowsAffected, err
 }
@@ -41,4 +41,3 @@ func (u *MovieService) DeleteMovie(uid uint64) (int64, error) {
 	fmt.Println("uid", uid)
 	return u.getMovieService().Model.Delete(uid)
 }
-

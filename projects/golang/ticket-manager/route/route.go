@@ -33,6 +33,7 @@ func DefinitionRoute(router *gin.Engine) {
 	router.POST("/dologin", homeController.DoLogin)
 
 	var movieController *controller.MovieController
+	var userController *controller.UserController
 
 	auth := router.Group("/")
 	auth.Use(middleware.AuthMiddle())
@@ -43,7 +44,6 @@ func DefinitionRoute(router *gin.Engine) {
 		auth.GET("/movie/add", homeController.AddMovie)
 
 		// user
-		var userController *controller.UserController
 		auth.GET("/users", userController.GetAllUsers)
 		auth.POST("/user/create", userController.CreateUser)
 		auth.POST("/user/update", userController.UpdateUser)
@@ -59,7 +59,9 @@ func DefinitionRoute(router *gin.Engine) {
 	// api
 	api := router.Group("/api")
 	api.GET("/movies", movieController.GetAllMovies)
+	api.GET("/rpc/movies", movieController.GetAllMoviesRPC)
 	api.GET("/movie/:id", movieController.GetMovieByID)
+	api.GET("/users", userController.GetAllUsers)
 
 }
 
@@ -69,47 +71,4 @@ func NoRouteResponse(c *gin.Context) {
 		"code":  404,
 		"error": "oops, page not exists!",
 	})
-}
-
-func timedHandler(duration time.Duration) func(c *gin.Context) {
-	return func(c *gin.Context) {
-
-		// get the underlying request context
-		ctx := c.Request.Context()
-
-		// create the response data type to use as a channel type
-		type responseData struct {
-			status int
-			body   map[string]interface{}
-		}
-
-		// create a done channel to tell the request it's done
-		doneChan := make(chan responseData)
-
-		// here you put the actual work needed for the request
-		// and then send the doneChan with the status and body
-		// to finish the request by writing the response
-		go func() {
-			time.Sleep(duration)
-			doneChan <- responseData{
-				status: 200,
-				body:   gin.H{"hello": "world"},
-			}
-		}()
-
-		// non-blocking select on two channels see if the request
-		// times out or finishes
-		select {
-
-		// if the context is done it timed out or was cancelled
-		// so don't return anything
-		case <-ctx.Done():
-			return
-
-			// if the request finished then finish the request by
-			// writing the response
-		case res := <-doneChan:
-			c.JSON(res.status, res.body)
-		}
-	}
 }

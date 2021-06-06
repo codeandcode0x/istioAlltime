@@ -1,7 +1,10 @@
 package controller
 
 import (
+	"context"
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 	"ticket-manager/model"
@@ -9,7 +12,10 @@ import (
 	"ticket-manager/util"
 
 	"github.com/gin-gonic/gin"
+	"google.golang.org/grpc"
 	"gorm.io/gorm"
+
+	movie "ticket-manager/rpc/grpc/protos/movie"
 )
 
 type MovieController struct {
@@ -66,6 +72,7 @@ func (uc *MovieController) CreateMovie(c *gin.Context) {
 	})
 }
 
+// get all movies
 func (uc *MovieController) GetAllMovies(c *gin.Context) {
 	count := 10
 	countStr, exists := c.GetQuery("count")
@@ -91,6 +98,7 @@ func (uc *MovieController) GetAllMovies(c *gin.Context) {
 	})
 }
 
+// get movie by id
 func (uc *MovieController) GetMovieByID(c *gin.Context) {
 	id := c.Param("id")
 	if id == "" {
@@ -177,6 +185,7 @@ func (uc *MovieController) UpdateMovie(c *gin.Context) {
 	})
 }
 
+// delete movie
 func (uc *MovieController) DeleteMovie(c *gin.Context) {
 	uid, exists := c.GetPostForm("id")
 	if !exists {
@@ -208,5 +217,29 @@ func (uc *MovieController) DeleteMovie(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": 0,
 		"data": rowsAffected,
+	})
+}
+
+// rpc
+// get all movies
+func (uc *MovieController) GetAllMoviesRPC(c *gin.Context) {
+	conn, err := grpc.Dial(":20153", grpc.WithInsecure())
+	if err != nil {
+		fmt.Printf("faild to connect: %v", err)
+	}
+	defer conn.Close()
+
+	rpcClient := movie.NewMovieRPCClient(conn)
+	rpcResponse, err := rpcClient.GetAllMovies(context.Background(), &movie.MovieMsgRequest{Count: 100})
+	if err != nil {
+		log.Printf("could not request: %v", err)
+	}
+
+	movies := []model.Movie{}
+	json.Unmarshal([]byte(rpcResponse.Message), &movies)
+	log.Printf("movie list : %s !\n", rpcResponse.Message)
+	c.JSON(http.StatusOK, gin.H{
+		"code": 0,
+		"data": movies,
 	})
 }

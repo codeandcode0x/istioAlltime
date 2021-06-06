@@ -8,15 +8,31 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import java.util.logging.Logger;
 
 @SpringBootApplication
 //@EnableScheduling
 public class Application {
-
+	private static final Logger logger = Logger.getLogger(Application.class.getName());
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+		try {
+			RpcServerStart();
+		} catch (InterruptedException e) {
+			logger.info(e.getMessage());
+		} catch (IOException e ) {
+			logger.info(e.getMessage());
+		}
+	}
+
+	private static void RpcServerStart() throws IOException, InterruptedException {
+		final RpcServer Server = new RpcServer();
+		Server.Start();
+		Server.BlockUntilShutdown();
 	}
 
 	@Bean
