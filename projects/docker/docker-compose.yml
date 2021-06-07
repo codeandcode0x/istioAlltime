@@ -54,7 +54,7 @@ services:
       - 8090:8090
     environment:
       DB_HOST: mariadb
-      TICKET_MANAGER_HOST: ticket-manager:8080
+      TICKET_MANAGER_HOST: http://ticket-manager:8080
     restart: always
 
 
