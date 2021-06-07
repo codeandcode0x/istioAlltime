@@ -17,9 +17,6 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
-/**
- * A simple client that requests a greeting from the {@link HelloWorldServer}.
- */
 public class RpcClient {
   private static final Logger logger = Logger.getLogger(RpcClient.class.getName());
 
@@ -28,15 +25,10 @@ public class RpcClient {
 
   /** Construct client for accessing HelloWorld server using the existing channel. */
   public RpcClient(Channel channel) {
-    // 'channel' here is a Channel, not a ManagedChannel, so it is not this code's responsibility to
-    // shut it down.
-
-    // Passing Channels to code makes code easier to test and makes it easier to reuse Channels.
     movieStub = MovieRPCGrpc.newBlockingStub(channel);
     userStub = UserRPCGrpc.newBlockingStub(channel);
   }
 
-  /** Say hello to server. */
   public void getMovies(Integer count) {
     logger.info("list count:  " + count + " ...");
     MovieMsgRequest request = MovieMsgRequest.newBuilder().setCount(count).build();
@@ -71,7 +63,7 @@ public class RpcClient {
   public static void main(String[] args) throws Exception {
     Integer count = 3;
     // Access a service running on the local machine on port 50051
-    String target = "localhost:20154";
+    String target = "localhost:20153";
     // Allow passing in the count and target strings as command line arguments
     if (args.length > 0) {
       if ("--help".equals(args[0])) {

@@ -31,7 +31,7 @@ services:
   ticket-manager:
     depends_on:
     - initdata-job
-    image: roandocker/ticket-manager:0.0.1
+    image: roandocker/ticket-manager:latest
     command: /bin/sh -c "./ticket-manager"
     ports:
       - 8080:8080
@@ -48,12 +48,13 @@ services:
     depends_on:
     - initdata-job
     - ticket-manager
-    image: roandocker/ticket-frontend:0.0.1
+    image: roandocker/ticket-frontend:latest
     command: /bin/sh -c "java -jar /root/ticket-frontend.jar"
     ports:
       - 8090:8090
     environment:
       DB_HOST: mariadb
+      TICKET_MANAGER_HOST: ticket-manager:8080
     restart: always
 
 

@@ -37,9 +37,19 @@ java
 protoc --plugin=protoc-gen-grpc-java \
   --grpc-java_out="$OUTPUT_FILE" --proto_path="$DIR_OF_PROTO_FILE" "$PROTO_FILE"
 
-
 mvn protobuf:compile-custom
 
 mvn spring-boot:run
 
 ```
+
+## build
+```
+projects/build.sh
+```
+
+## run
+```sh
+docker-compose -f projects/docker/docker-compose.yml up
+```
+
