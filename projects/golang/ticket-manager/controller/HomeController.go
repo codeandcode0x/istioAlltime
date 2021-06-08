@@ -82,14 +82,90 @@ func (hc *HomeController) ProxyHome(c *gin.Context) {
 	})
 }
 
+func (hc *HomeController) UserList(c *gin.Context) {
+	var us *service.UserService
+	users, errUsers := us.FindAllUsers()
+	if errUsers != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code":  -1,
+			"error": errUsers,
+		})
+	}
+
+	c.HTML(http.StatusOK, "users.tmpl", gin.H{
+		"title": "用户列表",
+		"users": users,
+	})
+}
+
 func (hc *HomeController) AddUser(c *gin.Context) {
 	c.HTML(http.StatusOK, "add.tmpl", gin.H{
 		"title": "添加用户",
 	})
 }
 
+func (hc *HomeController) MovieList(c *gin.Context) {
+	var ms *service.MovieService
+	movies, errMovies := ms.FindAllMovies(10)
+	if errMovies != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code":  -1,
+			"error": errMovies,
+		})
+	}
+
+	c.HTML(http.StatusOK, "movies.tmpl", gin.H{
+		"title":  "电影列表",
+		"movies": movies,
+	})
+}
+
 func (hc *HomeController) AddMovie(c *gin.Context) {
 	c.HTML(http.StatusOK, "addmovie.tmpl", gin.H{
 		"title": "添加电影",
+	})
+}
+
+func (hc *HomeController) ShowList(c *gin.Context) {
+	var ms *service.ShowService
+	shows, errShows := ms.FindAllShows(10)
+	if errShows != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code":  -1,
+			"error": errShows,
+		})
+	}
+
+	c.HTML(http.StatusOK, "shows.tmpl", gin.H{
+		"title": "添加演出",
+		"shows": shows,
+	})
+}
+
+func (hc *HomeController) AddShow(c *gin.Context) {
+	c.HTML(http.StatusOK, "addshow.tmpl", gin.H{
+		"title": "添加演出",
+	})
+}
+
+func (hc *HomeController) InfoList(c *gin.Context) {
+	var ms *service.InfoService
+	infos, errInfo := ms.FindAllInfos(10)
+	if errInfo != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code":  -1,
+			"error": errInfo,
+		})
+	}
+
+	c.HTML(http.StatusOK, "infos.tmpl", gin.H{
+		"title": "添加资讯",
+		"infos": infos,
+	})
+}
+
+func (hc *HomeController) AddInfo(c *gin.Context) {
+	c.HTML(http.StatusOK, "addinfo.tmpl", gin.H{
+		"title": "添加资讯",
 	})
 }

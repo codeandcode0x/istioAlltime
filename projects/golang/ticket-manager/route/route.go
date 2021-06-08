@@ -34,26 +34,40 @@ func DefinitionRoute(router *gin.Engine) {
 
 	var movieController *controller.MovieController
 	var userController *controller.UserController
+	var showController *controller.ShowController
+	var infoController *controller.InfoController
 
 	auth := router.Group("/")
 	auth.Use(middleware.AuthMiddle())
 	{
 		auth.GET("/", homeController.ProxyHome)
 		auth.GET("/logout", homeController.Logout)
-		auth.GET("/user/add", homeController.AddUser)
-		auth.GET("/movie/add", homeController.AddMovie)
 
 		// user
-		auth.GET("/users", userController.GetAllUsers)
+		auth.GET("/users", homeController.UserList)   //web ui
+		auth.GET("/user/add", homeController.AddUser) //web ui
 		auth.POST("/user/create", userController.CreateUser)
 		auth.POST("/user/update", userController.UpdateUser)
 		auth.POST("/user/delete", userController.DeleteUser)
 
 		// movie
-		auth.GET("/movies", movieController.GetAllMovies)
+		auth.GET("/movies", homeController.MovieList)   //web ui
+		auth.GET("/movie/add", homeController.AddMovie) //web ui
 		auth.POST("/movie/create", movieController.CreateMovie)
 		auth.POST("/movie/update", movieController.UpdateMovie)
 		auth.POST("/movie/delete", movieController.DeleteMovie)
+
+		auth.GET("/shows", homeController.ShowList)   //web ui
+		auth.GET("/show/add", homeController.AddShow) //web ui
+		auth.POST("/show/create", showController.CreateShow)
+		auth.POST("/show/update", showController.UpdateShow)
+		auth.POST("/show/delete", showController.DeleteShow)
+
+		auth.GET("/infos", homeController.InfoList)   //web ui
+		auth.GET("/info/add", homeController.AddInfo) //web ui
+		auth.POST("/info/create", infoController.CreateInfo)
+		auth.POST("/info/update", infoController.UpdateInfo)
+		auth.POST("/info/delete", infoController.DeleteInfo)
 	}
 
 	// api
@@ -62,7 +76,6 @@ func DefinitionRoute(router *gin.Engine) {
 	api.GET("/rpc/movies", movieController.GetAllMoviesRPC)
 	api.GET("/movie/:id", movieController.GetMovieByID)
 	api.GET("/users", userController.GetAllUsers)
-
 }
 
 // no route

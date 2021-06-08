@@ -1,0 +1,59 @@
+{{template "header"}}
+
+<div class="container">
+
+  
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">资讯列表</h1>
+  <p class="lead"></p>
+  </div>
+  
+  <div class="card-deck mb-3">
+
+    {{range $i, $info := .infos}}
+
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal text-center">{{$info.Title}}</h4>
+      </div>
+      <div class="card-body">
+        <div class="list-unstyled mt-3 mb-4 text-center">
+          <img src="{{$info.Image}}" style="width: 250px" />
+        </div>
+
+        <div class="list-unstyled mt-3 mb-4">
+         <span style="text-align: left; font-size: 14px;">{{$info.Minfo}}</span>
+        </div>
+
+        <div class="list-unstyled mt-3 mb-4">
+         <span style="text-align: left; font-size: 14px;">{{$info.Content}}</span>
+        </div>
+
+        <table class="col-12">
+          <tr>
+            <td style="border: none;">
+              <form action="/info/update" method="post" class="form-horizontal" role="form" enctype="application/x-www-form-urlencoded">
+              <input type="hidden" name="id" id="id" value="{{ $info.ID }}">
+              <button type="button" class="btn btn-sm btn-block btn-outline-primary"> 更新 </button>
+              </form>
+            </td>
+            <td style="border: none;">
+              <form action="/info/delete" method="post" class="form-horizontal" role="form" enctype="application/x-www-form-urlencoded">
+              <input type="hidden" name="id" id="id" value="{{ $info.ID }}">
+              <button type="submit" class="btn btn-sm btn-block btn-outline-primary"> 删除 </button>
+              </form>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    {{end}}
+   
+    <div class="card mb-4 shadow-sm">
+      <a href="/info/add" type="button" class="btn btn-sm btn-block btn-outline-primary"> 添加资讯 </a>
+    </div>
+  </div>
+
+{{template "footer"}}
+

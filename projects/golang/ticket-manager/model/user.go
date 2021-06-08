@@ -2,21 +2,22 @@ package model
 
 import (
 	"database/sql"
-	"gorm.io/gorm"
 	"ticket-manager/db"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 // user entity
 type User struct {
-	ID           uint64  `json:"id,omitempty"`
-	Name         string  `json:"name,omitempty"`
-	Password     string  `json:"password,omitempty"`
-  	Email        string  `json:"email,omitempty"`
-  	Age          int   `json:"age,omitempty"`
-  	Birthday     time.Time  `json:"birthday,omitempty"`
-  	MemberNumber sql.NullString  `json:"member_number,omitempty"`
-	Role         string  `json:"Role,omitempty"`
+	ID           uint64         `json:"id,omitempty"`
+	Name         string         `json:"name,omitempty"`
+	Password     string         `json:"password,omitempty"`
+	Email        string         `json:"email,omitempty"`
+	Age          int            `json:"age,omitempty"`
+	Birthday     time.Time      `json:"birthday,omitempty"`
+	MemberNumber sql.NullString `json:"member_number,omitempty"`
+	Role         string         `json:"Role,omitempty"`
 	gorm.Model
 }
 
@@ -31,8 +32,6 @@ type UserModel interface {
 	FindByEmail(email string) (*User, error)
 }
 
-
-
 func (u *User) Create(user *User) (uint64, error) {
 	result := db.DBConn.Model(&User{}).Create(&user)
 	return user.ID, result.Error
@@ -43,19 +42,16 @@ func (u *User) Update(uid uint64, user *User) (int64, error) {
 	return result.RowsAffected, result.Error
 }
 
-
 func (u *User) Delete(uid uint64) (int64, error) {
 	result := db.DBConn.Model(&User{}).Where("id = ?", uid).Delete(&User{})
 	return result.RowsAffected, result.Error
 }
 
-
 func (u *User) FindAll() ([]User, error) {
 	var users []User
-	result := db.DBConn.Model(&User{}).Find(&users)
+	result := db.DBConn.Model(&User{}).Order("id desc").Find(&users)
 	return users, result.Error
 }
-
 
 func (u *User) FindByID(uid uint64) (*User, error) {
 	var user *User
@@ -72,14 +68,3 @@ func (u *User) FindByEmail(email string) (*User, error) {
 func (u *User) FindByName(name string) (*User, error) {
 	return &User{}, nil
 }
-
-
-
-
-
-
-
-
-
-
-
