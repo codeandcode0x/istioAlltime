@@ -30,7 +30,7 @@ func (uc *InfoController) getInfoController(c *gin.Context) *InfoController {
 
 // create Info
 func (uc *InfoController) CreateInfo(c *gin.Context) {
-	name := c.PostForm("name")
+	image := c.PostForm("image")
 	title := c.PostForm("title")
 	content := c.PostForm("content")
 	mtype := c.PostForm("mtype")
@@ -38,7 +38,7 @@ func (uc *InfoController) CreateInfo(c *gin.Context) {
 	mtime := c.PostForm("mtime")
 	//mtype, _ :=  strconv.Atoi(c.PostForm("age"))
 	info := &model.Info{
-		Name:    name,
+		Image:   image,
 		Title:   title,
 		Content: content,
 		Mtype:   mtype,
@@ -146,14 +146,14 @@ func (uc *InfoController) UpdateInfo(c *gin.Context) {
 		panic(" get Info error !")
 	}
 
-	name := c.PostForm("name")
+	image := c.PostForm("image")
 	title := c.PostForm("title")
 	content := c.PostForm("content")
 	mtype := c.PostForm("mtype")
 	minfo := c.PostForm("minfo")
 	mtime := c.PostForm("mtime")
 
-	info.Name = name
+	info.Image = image
 	info.Title = title
 	info.Content = content
 	info.Mtype = mtype

@@ -69,15 +69,16 @@ func (uc *ShowController) CreateShow(c *gin.Context) {
 // get all shows
 func (uc *ShowController) GetAllShows(c *gin.Context) {
 	count := 10
-	countStr, exists := c.GetQuery("count")
-	if exists {
+	countStr, countExists := c.GetQuery("count")
+	mtype, mtypeExists := c.GetQuery("mtype")
+	if countExists && mtypeExists {
 		count, _ = strconv.Atoi(countStr)
 	}
 	// return error
 	if uc.getShowController(c) == nil {
 		return
 	}
-	shows, err := uc.getShowController(c).Service.FindAllShows(count)
+	shows, err := uc.getShowController(c).Service.FindAllShows(mtype, count)
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{

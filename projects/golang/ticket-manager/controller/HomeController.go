@@ -128,7 +128,7 @@ func (hc *HomeController) AddMovie(c *gin.Context) {
 
 func (hc *HomeController) ShowList(c *gin.Context) {
 	var ms *service.ShowService
-	shows, errShows := ms.FindAllShows(10)
+	shows, errShows := ms.FindAllShows("演唱会", 10)
 	if errShows != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,

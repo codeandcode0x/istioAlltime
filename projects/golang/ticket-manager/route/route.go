@@ -76,6 +76,8 @@ func DefinitionRoute(router *gin.Engine) {
 	api.GET("/rpc/movies", movieController.GetAllMoviesRPC)
 	api.GET("/movie/:id", movieController.GetMovieByID)
 	api.GET("/users", userController.GetAllUsers)
+	api.GET("/shows", showController.GetAllShows)
+	api.GET("/infos", infoController.GetAllInfos)
 }
 
 // no route

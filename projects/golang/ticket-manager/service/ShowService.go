@@ -16,8 +16,8 @@ func (u *ShowService) getShowService() *ShowService {
 }
 
 // find all Shows
-func (u *ShowService) FindAllShows(count int) ([]model.Show, error) {
-	return u.getShowService().Model.FindAll(count)
+func (u *ShowService) FindAllShows(mtype string, count int) ([]model.Show, error) {
+	return u.getShowService().Model.FindAll(mtype, count)
 }
 
 // find Show by id

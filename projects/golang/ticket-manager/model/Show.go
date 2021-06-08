@@ -43,9 +43,9 @@ func (u *Show) Delete(id uint64) (int64, error) {
 	return result.RowsAffected, result.Error
 }
 
-func (u *Show) FindAll(count int) ([]Show, error) {
+func (u *Show) FindAll(mtype string, count int) ([]Show, error) {
 	var Shows []Show
-	result := db.DBConn.Model(&Show{}).Order("id desc").Limit(count).Find(&Shows)
+	result := db.DBConn.Model(&Show{}).Where("mtype", mtype).Order("id desc").Limit(count).Find(&Shows)
 	return Shows, result.Error
 }
 

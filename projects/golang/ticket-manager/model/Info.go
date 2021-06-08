@@ -9,7 +9,7 @@ import (
 // Info entity
 type Info struct {
 	ID      uint64 `json:"id,omitempty"`
-	Name    string `json:"name,omitempty"`
+	Image   string `json:"image,omitempty"`
 	Title   string `json:"title,omitempty"`
 	Content string `json:"content,omitempty" gorm:"type:text"`
 	Mtype   string `json:"mtype,omitempty"`

@@ -2,6 +2,8 @@ package com.msa.ticket.frontend;
 
 import com.msa.ticket.frontend.pojo.MovieData;
 import com.msa.ticket.frontend.pojo.MovieDatas;
+import com.msa.ticket.frontend.pojo.ShowDatas;
+import com.msa.ticket.frontend.pojo.InfoDatas;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -21,8 +23,8 @@ import java.util.logging.Logger;
 
 @Slf4j
 @Controller
-public class MovieController {
-    private static final Logger logger = Logger.getLogger(MovieController.class.getName());
+public class HomeController {
+    private static final Logger logger = Logger.getLogger(HomeController.class.getName());
 
     @Autowired
     private Environment env;
@@ -35,13 +37,31 @@ public class MovieController {
         if (env.getProperty("TICKET_MANAGER_HOST") != null) {
             ticketHost = env.getProperty("TICKET_MANAGER_HOST");
         }
-        String url = ticketHost+"/api/movies?count="+count;
+        String movieUrl = ticketHost+"/api/movies?count="+count;
         RestTemplate restTemplate = new RestTemplate();
-        MovieDatas movies = restTemplate.getForObject(url, MovieDatas.class);
+        MovieDatas movies = restTemplate.getForObject(movieUrl, MovieDatas.class);
         System.out.println(movies);
 
+        String showMusicUrl = ticketHost+"/api/shows?mtype=演唱会&count="+count;
+        ShowDatas showMusics = restTemplate.getForObject(showMusicUrl, ShowDatas.class);
+        System.out.println(showMusics);
+
+        String showDramaUrl = ticketHost+"/api/shows?mtype=歌舞剧&count="+count;
+        ShowDatas showDramas = restTemplate.getForObject(showDramaUrl, ShowDatas.class);
+        System.out.println(showDramas);
+
+        String infoUrl = ticketHost+"/api/infos?count="+count;
+        InfoDatas infos = restTemplate.getForObject(infoUrl, InfoDatas.class);
+        System.out.println(infos);
+
         assert movies != null;
+        assert showMusics != null;
+        assert showDramas != null;
+        assert infos != null;
         model.addAttribute("movies", movies.getData());
+        model.addAttribute("showMusics", showMusics.getData());
+        model.addAttribute("showDramas", showDramas.getData());
+        model.addAttribute("infos", infos.getData());
         return "home";
     }
 
