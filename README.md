@@ -33,3 +33,8 @@ projects/build.sh
 ```sh
 docker-compose -f projects/docker/docker-compose.yml up
 ```
+
+# build init data job
+```sh
+docker build -t roandocker/initdata-job:latest -f projects/docker/initdata-job/Dockerfile  projects/docker/initdata-job
+```

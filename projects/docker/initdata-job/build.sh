@@ -13,7 +13,7 @@ repoUser="roandocker"
 function build() {
 	version=$1
 	repoUser=$2
-	docker build -t $repoUser/initdata-job:$version -f Dockerfile  --no-cache .
+	docker build -t roandocker/initdata-job:$version -f projects/docker/initdata-job/Dockerfile --no-cache  projects/docker/initdata-job
 }
 
 # prune image
