@@ -1,5 +1,5 @@
 #!bin/bash
-set -e;
+# set -e;
 
 sleep $INTERVAL_TIME;
 
@@ -17,9 +17,9 @@ fi
 
 # check
 instance=`eval echo '$'"$MIGRATION"`;
-mysql -h$instance -u$DBUSER -p$DBPASSWD --default-character-set=utf8mb4 -e "show databases;"
+mysql -h$instance -u$DBUSER -p$DBPASSWD --default-character-set=utf8mb4 -e "show databases;";
 
-set +e;
+# set +e;
 function initDbJob(){
     for file in `ls $1` 
     do
