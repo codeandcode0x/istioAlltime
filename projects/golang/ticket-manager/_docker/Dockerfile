@@ -23,7 +23,7 @@ COPY --from=0 /opt/app/config/Config.yaml  /root/config/Config.yaml
 COPY --from=0 /opt/app/web /root/web/
 
 RUN ls -all
-RUN chmod 777 ticket-
+RUN chmod 777 ticket-manager
 
 # health check
 # HEALTHCHECK --interval=5s --timeout=3s --retries=3 \

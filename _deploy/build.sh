@@ -15,7 +15,7 @@ function build() {
 	version=$1
 	docker build -t $repoUser/ticket-manager:$version -f projects/golang/ticket-manager/_docker/Dockerfile  --no-cache projects/golang/ticket-manager/
 	docker build -t $repoUser/ticket-frontend:$version -f projects/java/ticket-frontend/_docker/Dockerfile  --no-cache projects/java/ticket-frontend/
-	docker build -t $repoUser/initdata-job:$version -f projects/docker/initdata-job/Dockerfile --no-cache  projects/docker/initdata-job
+	docker build -t $repoUser/initdata-job:$version -f docker/initdata-job/Dockerfile --no-cache  docker/initdata-job
 }
 
 # prune image
@@ -28,7 +28,7 @@ function push() {
 	version=$1
 	docker push $repoUser/ticket-manager:$version
 	docker push $repoUser/ticket-frontend:$version
-	# docker push $repoUser/initdata-job:$version
+	docker push $repoUser/initdata-job:$version
 }
 
 
