@@ -19,7 +19,6 @@ WORKDIR /root/
 
 COPY --from=0 /opt/app/ticket-frontend.jar /root
 
-RUN ls -all
 RUN chmod 777 ticket-frontend.jar
 
 # health check

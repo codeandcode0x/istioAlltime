@@ -26,7 +26,7 @@ mvn spring-boot:run
 
 # build
 ```sh
-projects/build.sh 
+_deploy/build.sh
 ```
 
 # run

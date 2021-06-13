@@ -53,8 +53,8 @@ services:
 
   ticket-manager:
     depends_on:
-      # initdata-job:
-      #   condition: service_completed_successfully
+      initdata-job:
+        condition: service_started
       mariadb:
           condition: service_healthy
     image: roandocker/ticket-manager:latest
@@ -89,8 +89,8 @@ services:
 
   ticket-fronted:
     depends_on:
-      - ticket-manager
-        # condition: service_healthy
+      ticket-manager:
+        condition: service_healthy
     image: roandocker/ticket-frontend:latest
     command: /bin/sh -c "java -jar /root/ticket-frontend.jar"
     ports:
