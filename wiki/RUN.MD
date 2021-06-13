@@ -19,3 +19,14 @@ docker-compose -f docker-compose.yml -p ticket up
 ## go module off
 GO111MODULE=off go get -v github.com/swaggo/swag/cmd/swag
 
+minikube
+```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+minikube start --driver=none
+
+minikube config set cpus 12
+minikube config set memory 28000
+
+```

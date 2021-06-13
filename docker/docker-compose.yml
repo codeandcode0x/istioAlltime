@@ -32,9 +32,10 @@ services:
   # init data job
   initdata-job:
     depends_on:
-      # - mariadb
-      mariadb:
-        condition: service_healthy
+      - mariadb
+    # depends_on:
+    #   mariadb:
+    #     condition: service_healthy
     image: roandocker/initdata-job:latest
     environment: 
       MARIADB_SERVICE_HOST: "mariadb"
@@ -57,12 +58,13 @@ services:
   # ticket backend
   ticket-manager:
     depends_on:
-      # - initdata-job
-      # - mariadb
-      initdata-job:
-        condition: service_started
-      mariadb:
-          condition: service_healthy
+      - initdata-job
+      - mariadb
+    # depends_on:
+      # initdata-job:
+      #   condition: service_started
+      # mariadb:
+      #     condition: service_healthy
     image: roandocker/ticket-manager:latest
     command: /bin/sh -c "./ticket-manager"
     ports:
@@ -86,20 +88,21 @@ services:
         reservations:
           cpus: '0.25'
           memory: 150M
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8080/healthz || exit 1"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
-      start_period: 40s
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://localhost:8080/healthz || exit 1"]
+    #   interval: 5s
+    #   timeout: 3s
+    #   retries: 3
+    #   start_period: 40s
 
 
   # ticket frontend
   ticket-fronted:
     depends_on:
-      # - ticket-manager
-      ticket-manager:
-        condition: service_healthy
+      - ticket-manager
+    # depends_on:
+      # ticket-manager:
+      #   condition: service_healthy
     image: roandocker/ticket-frontend:latest
     command: /bin/sh -c "java -jar /root/ticket-frontend.jar"
     ports:
@@ -119,13 +122,12 @@ services:
         reservations:
           cpus: '0.25'
           memory: 150M
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8090/actuator/health || exit 1"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
-      start_period: 40s
-
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://localhost:8090/actuator/health || exit 1"]
+    #   interval: 5s
+    #   timeout: 3s
+    #   retries: 3
+    #   start_period: 40s
 
 volumes:
   todo-mysql-data:
