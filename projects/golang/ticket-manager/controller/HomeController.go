@@ -1,9 +1,11 @@
 package controller
 
 import (
+	"net"
 	"net/http"
 	"ticket-manager/middleware"
 	"ticket-manager/service"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
@@ -167,5 +169,28 @@ func (hc *HomeController) InfoList(c *gin.Context) {
 func (hc *HomeController) AddInfo(c *gin.Context) {
 	c.HTML(http.StatusOK, "addinfo.tmpl", gin.H{
 		"title": "添加资讯",
+	})
+}
+
+func (hc *HomeController) Healthz(c *gin.Context) {
+	conn, err := net.DialTimeout("tcp", "http://mariadb:3306", time.Second*3)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"code":  http.StatusInternalServerError,
+			"error": err.Error(),
+		})
+	}
+
+	err = conn.Close()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"code":  http.StatusInternalServerError,
+			"error": err.Error(),
+		})
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code":    0,
+		"message": "health",
 	})
 }

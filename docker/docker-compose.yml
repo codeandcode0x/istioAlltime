@@ -28,8 +28,11 @@ services:
       retries: 3
       start_period: 40s
 
+
+  # init data job
   initdata-job:
     depends_on:
+      # - mariadb
       mariadb:
         condition: service_healthy
     image: roandocker/initdata-job:latest
@@ -51,8 +54,11 @@ services:
         max_attempts: 1
     
 
+  # ticket backend
   ticket-manager:
     depends_on:
+      # - initdata-job
+      # - mariadb
       initdata-job:
         condition: service_started
       mariadb:
@@ -81,14 +87,17 @@ services:
           cpus: '0.25'
           memory: 150M
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8080 || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/healthz || exit 1"]
       interval: 5s
       timeout: 3s
       retries: 3
       start_period: 40s
 
+
+  # ticket frontend
   ticket-fronted:
     depends_on:
+      # - ticket-manager
       ticket-manager:
         condition: service_healthy
     image: roandocker/ticket-frontend:latest
@@ -110,12 +119,12 @@ services:
         reservations:
           cpus: '0.25'
           memory: 150M
-    # healthcheck:
-    #   test: ["CMD-SHELL", "curl -f http://localhost:8090 || exit 1"]
-    #   interval: 5s
-    #   timeout: 3s
-    #   retries: 3
-    #   start_period: 40s
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8090/actuator/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
 
 
 volumes:

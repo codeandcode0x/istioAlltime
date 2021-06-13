@@ -13,9 +13,9 @@ repoUser="roandocker"
 # build image
 function build() {
 	version=$1
-	docker build -t $repoUser/ticket-manager:$version -f projects/golang/ticket-manager/_docker/Dockerfile  --no-cache projects/golang/ticket-manager/
-	docker build -t $repoUser/ticket-frontend:$version -f projects/java/ticket-frontend/_docker/Dockerfile  --no-cache projects/java/ticket-frontend/
-	docker build -t $repoUser/initdata-job:$version -f docker/initdata-job/Dockerfile --no-cache  docker/initdata-job
+	docker build -t $repoUser/ticket-manager:$version -f docker/projects/golang/ticket-manager/Dockerfile  --no-cache projects/golang/ticket-manager/
+	docker build -t $repoUser/ticket-frontend:$version -f docker/projects/java/ticket-frontend/Dockerfile  --no-cache projects/java/ticket-frontend/
+	docker build -t $repoUser/initdata-job:$version -f docker/projects/initdata-job/Dockerfile --no-cache  projects/initdata-job
 }
 
 # prune image
