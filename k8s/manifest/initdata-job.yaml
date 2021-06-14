@@ -14,14 +14,14 @@ spec:
     spec:
       initContainers:
       - name: wait-for-onezone
-        image: roandocker/k8s-wait-for:latest
+        image: roandocker/k8s-wait-for:1.0.0
         imagePullPolicy: IfNotPresent
         args:
           - "pod"
           - "-lapp=mariadb"
       containers:
       - name: initdata-job
-        image: roandocker/initdata-job:latest
+        image: roandocker/initdata-job:1.0.0
         env:
         - name: MARIADB_SERVICE_HOST
           value: "mariadb"

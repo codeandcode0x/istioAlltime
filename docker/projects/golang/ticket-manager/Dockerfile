@@ -14,8 +14,7 @@ RUN apt-get install git && \
     CGO_ENABLED=0 GOOS=linux go build -o /opt/app/ticket-manager main.go
 
 
-# FROM ubuntu:16.04 as prod
-FROM openjdk:8-jdk-oraclelinux7 as prod
+FROM ubuntu:16.04 as prod
 
 WORKDIR /root/
 

@@ -25,7 +25,7 @@ spec:
     spec:
       initContainers:
       - name: wait-for-onezone
-        image: roandocker/k8s-wait-for:latest
+        image: roandocker/k8s-wait-for:1.0.0
         imagePullPolicy: IfNotPresent
         args:
           - "job"
@@ -49,7 +49,7 @@ spec:
         imagePullPolicy: Always
         # command: ["/bin/sh","-c", "/root/ticket-manager"]
         livenessProbe:
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 10
           tcpSocket:
             port: 8080
@@ -58,7 +58,7 @@ spec:
         ports:
         - containerPort: 8080
         readinessProbe:
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 10
           tcpSocket:
             port: 8080

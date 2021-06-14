@@ -35,7 +35,7 @@ docker-compose -f projects/docker/docker-compose.yml up
 
 # build init data job
 ```sh
-docker build -t roandocker/initdata-job:latest -f projects/docker/initdata-job/Dockerfile  projects/docker/initdata-job
+docker build -t roandocker/initdata-job:1.0.0 -f projects/docker/initdata-job/Dockerfile  projects/docker/initdata-job
 ```
 
 helm install apps
