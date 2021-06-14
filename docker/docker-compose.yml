@@ -65,7 +65,7 @@ services:
       #   condition: service_started
       # mariadb:
       #     condition: service_healthy
-    image: roandocker/ticket-manager:latest
+    image: roandocker/ticket-manager:1.0.0
     command: /bin/sh -c "./ticket-manager"
     ports:
       - 8080:8080
@@ -103,7 +103,7 @@ services:
     # depends_on:
       # ticket-manager:
       #   condition: service_healthy
-    image: roandocker/ticket-frontend:latest
+    image: roandocker/ticket-frontend:1.0.0
     command: /bin/sh -c "java -jar /root/ticket-frontend.jar"
     ports:
       - 8090:8090

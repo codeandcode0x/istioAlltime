@@ -14,7 +14,7 @@ spec:
     spec:
       initContainers:
       - name: wait-for-onezone
-        image: codingcorp-docker.pkg.coding.net/nocalhost/public/nocalhost-wait:latest
+        image: roandocker/k8s-wait-for:latest
         imagePullPolicy: IfNotPresent
         args:
           - "pod"

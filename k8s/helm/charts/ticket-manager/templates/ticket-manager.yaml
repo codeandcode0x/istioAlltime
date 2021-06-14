@@ -25,7 +25,7 @@ spec:
     spec:
       initContainers:
       - name: wait-for-onezone
-        image: codingcorp-docker.pkg.coding.net/nocalhost/public/nocalhost-wait:latest
+        image: roandocker/k8s-wait-for:latest
         imagePullPolicy: IfNotPresent
         args:
           - "job"
@@ -45,7 +45,7 @@ spec:
           value: ticket
         - name: DB_LOGMODE
           value: "true"
-        image: roandocker/ticket-manager:latest
+        image: roandocker/ticket-manager:1.0.0
         imagePullPolicy: Always
         # command: ["/bin/sh","-c", "/root/ticket-manager"]
         livenessProbe:
