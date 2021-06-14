@@ -52,8 +52,6 @@ spec:
             cpu: 50m
             memory: 256Mi
       enableServiceLinks: false
-      # imagePullSecrets:
-      # - name: codingcorp-registry-cred
 ---
 apiVersion: v1
 kind: Service

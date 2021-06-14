@@ -12,7 +12,6 @@ spec:
       annotations:
         sidecar.istio.io/inject: "false"
     spec:
-      priorityClassName: nocalhost-container-critical
       initContainers:
       - name: wait-for-onezone
         image: codingcorp-docker.pkg.coding.net/nocalhost/public/nocalhost-wait:latest
@@ -23,8 +22,6 @@ spec:
       containers:
       - name: initdata-job
         image: roandocker/initdata-job:latest
-        # command: ["/bin/bash", "/app/initdata.sh"]
-        # args: ["istioAlltime/data", "ticket"]
         env:
         - name: MARIADB_SERVICE_HOST
           value: "mariadb"

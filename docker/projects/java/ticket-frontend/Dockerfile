@@ -25,4 +25,4 @@ RUN chmod 777 ticket-frontend.jar
 # HEALTHCHECK --interval=5s --timeout=3s --retries=3 \
 #   CMD curl -fs http://localhost:8090 || exit 1
 
-CMD ["java -jar /root/ticket-frontend.jar"]
+CMD ["/bin/sh", "-c", "java -jar /root/ticket-frontend.jar"]

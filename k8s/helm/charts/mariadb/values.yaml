@@ -15,7 +15,7 @@ global:
 
 # mariadb setting
 mariadb:
-  pvcEnabled: true
+  pvcEnabled: false
   # pvc mode : PVC、HOSTPATH
   pvcMode: PVC
   selectorNodeName: "none"

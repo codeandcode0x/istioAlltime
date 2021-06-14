@@ -30,4 +30,4 @@ RUN chmod 777 ticket-manager
 # HEALTHCHECK --interval=5s --timeout=3s --retries=3 \
 #   CMD curl -fs http://localhost:8080 || exit 1
 
-CMD ["./ticket-backend"]
+CMD ["/bin/sh", "-c", "/root/ticket-manager"]

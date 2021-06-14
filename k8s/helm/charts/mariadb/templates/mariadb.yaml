@@ -58,20 +58,20 @@ spec:
         - name: MARIADB_ROOT_PASSWORD
           value : root123
         volumeMounts:
-          - name: etc-mysql-conf-d
-            mountPath: /etc/mysql/conf.d/connections.cnf
-            subPath: connections.cnf
+        #   - name: etc-mysql-conf-d
+        #     mountPath: /etc/mysql/conf.d/connections.cnf
+        #     subPath: connections.cnf
           {{- if .Values.mariadb.pvcEnabled }}
           - name: mariadb-data
             mountPath: /var/lib/mysql
           {{- end }}
-      priorityClassName: nocalhost-container-critical
-      imagePullSecrets:
-      - name: codingcorp-registry-cred
-      volumes:
-      - name: etc-mysql-conf-d
-        configMap:
-          name: etc-mysql-conf-d
+      # priorityClassName: c-container-critical
+      # imagePullSecrets:
+      # - name: codingcorp-registry-cred
+      # volumes:
+      # - name: etc-mysql-conf-d
+      #   configMap:
+      #     name: etc-mysql-conf-d
 {{- if .Values.mariadb.pvcEnabled }}
   {{- if eq .Values.mariadb.pvcMode "PVC" }}
   volumeClaimTemplates:

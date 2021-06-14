@@ -37,31 +37,33 @@ spec:
           value : http://ticket-manager:8080
         image: roandocker/ticket-frontend:latest
         imagePullPolicy: Always
+        # command: ["/bin/sh", "-c", "java -jar /root/ticket-frontend.jar"]
         livenessProbe:
-          initialDelaySeconds: 60
+          initialDelaySeconds: 30
           periodSeconds: 10
           httpGet:
             path: /actuator/health
             port: 8090
           timeoutSeconds: 3
+          failureThreshold: 30
         ports:
         - containerPort: 8090
         readinessProbe:
-          initialDelaySeconds: 60
+          initialDelaySeconds: 30
           periodSeconds: 10
-          tcpSocket:
+          httpGet:
+            path: /actuator/health
             port: 8090
           timeoutSeconds: 3
+          failureThreshold: 30
         resources:
           limits:
-            cpu: 150m
+            cpu: 200m
             memory: 680Mi
           requests:
-            cpu: 50m
+            cpu: 100m
             memory: 256Mi
       enableServiceLinks: false
-      # imagePullSecrets:
-      # - name: codingcorp-registry-cred
 ---
 apiVersion: v1
 kind: Service
