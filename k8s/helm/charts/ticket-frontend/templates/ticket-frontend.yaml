@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    dependOn: ticket-frontend
+  name: ticket-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ticket-frontend
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        proxy.istio.io/config: |
+          holdApplicationUntilProxyStarts: true
+        sidecar.istio.io/proxyCPU: "10m"
+        sidecar.istio.io/proxyCPULimit: "150m"
+        sidecar.istio.io/proxyMemory: "32Mi"
+        sidecar.istio.io/proxyMemoryLimit: "2Gi"
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: ticket-frontend
+    spec:
+      initContainers:
+      - name: wait-for-onezone
+        image: codingcorp-docker.pkg.coding.net/nocalhost/public/nocalhost-wait:latest
+        imagePullPolicy: IfNotPresent
+        args:
+          - "pod"
+          - "-lapp=ticket-manager"
+      containers:
+      - name: ticket-frontend
+        env:
+        - name: TICKET_MANAGER_HOST
+          value : http://ticket-manager:8080
+        image: roandocker/ticket-frontend:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          httpGet:
+            path: /actuator/health
+            port: 8090
+          timeoutSeconds: 3
+        ports:
+        - containerPort: 8090
+        readinessProbe:
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          tcpSocket:
+            port: 8090
+          timeoutSeconds: 3
+        resources:
+          limits:
+            cpu: 150m
+            memory: 680Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+      enableServiceLinks: false
+      # imagePullSecrets:
+      # - name: codingcorp-registry-cred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ticket-frontend
+spec:
+  ports:
+  - name: "http-8090"
+    port: 8090
+    targetPort: 8090
+  selector:
+    app: ticket-frontend
+  type: ClusterIP
+status:
+  loadBalancer: {}
+...

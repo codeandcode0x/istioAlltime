@@ -1,0 +1,22 @@
+apiVersion: v2
+name: ticket-app
+description: ticket app
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+
+# dependencies
+dependencies:
+  - name: mariadb
+    version: 1.0.0
+    repository: "file://../../charts/mariadb"
+  - name: initdata-job
+    version: 1.0.0
+    repository: "file://../../charts/jobs/initdata-job"
+  - name: ticket-manager
+    version: 1.0.0
+    repository: "file://../../charts/ticket-manager"
+  - name: ticket-frontend
+    version: 1.0.0
+    repository: "file://../../charts/ticket-frontend"

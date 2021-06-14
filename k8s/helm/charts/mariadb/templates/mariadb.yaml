@@ -1,0 +1,133 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb
+spec:
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: mariadb
+  replicas: 1
+  serviceName: "mariadb"
+  template:
+    metadata:
+      annotations:
+        proxy.istio.io/config: |
+          holdApplicationUntilProxyStarts: true
+        sidecar.istio.io/proxyCPU: "10m"
+        sidecar.istio.io/proxyCPULimit: "150m"
+        sidecar.istio.io/proxyMemory: "32Mi"
+        sidecar.istio.io/proxyMemoryLimit: {{ .Values.global.istio.sidecar.memLimit | default "580Mi" | quote }}
+        sidecar.istio.io/inject: "false"
+      labels:
+        app: mariadb
+    spec:
+      {{- if .Values.mariadb.pvcEnabled }}
+        {{- if eq .Values.mariadb.pvcMode "HOSTPATH" }}
+      nodeName: {{ .Values.mariadb.selectorNodeName }}
+        {{- end }}
+      {{- end }}
+      enableServiceLinks: false
+      containers:
+      - name: mariadb
+        image: mariadb:10.2.38
+        ports:
+        - containerPort: 3306
+        readinessProbe:
+          tcpSocket:
+            port: 3306
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          timeoutSeconds: 3
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          timeoutSeconds: 3
+        resources:
+          limits:
+            cpu: 350m
+            memory: 680Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+        env:
+        - name: MARIADB_ROOT_PASSWORD
+          value : root123
+        volumeMounts:
+          - name: etc-mysql-conf-d
+            mountPath: /etc/mysql/conf.d/connections.cnf
+            subPath: connections.cnf
+          {{- if .Values.mariadb.pvcEnabled }}
+          - name: mariadb-data
+            mountPath: /var/lib/mysql
+          {{- end }}
+      priorityClassName: nocalhost-container-critical
+      imagePullSecrets:
+      - name: codingcorp-registry-cred
+      volumes:
+      - name: etc-mysql-conf-d
+        configMap:
+          name: etc-mysql-conf-d
+{{- if .Values.mariadb.pvcEnabled }}
+  {{- if eq .Values.mariadb.pvcMode "PVC" }}
+  volumeClaimTemplates:
+  - metadata:
+      name: mariadb-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: cbs
+      resources:
+        requests:
+          storage: 10Gi
+  {{- else if eq .Values.mariadb.pvcMode "HOSTPATH" }}
+      - name: mariadb-data
+        persistentVolumeClaim:
+          claimName: local-storage-mariadb-pvc
+  {{- end }}
+
+{{- end }}
+
+# service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb
+spec:
+  selector:
+    app: mariadb
+  type: ClusterIP
+  ports:
+  - name: "tcp-3306"
+    port: 3306
+
+# setting local pvc
+{{- if .Values.mariadb.pvcEnabled }}
+  {{- if eq .Values.mariadb.pvcMode "HOSTPATH" }}
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-storage-mariadb-pvc
+spec:
+  storageClassName: local-storage-mariadb
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+  {{- end}}
+{{- end}}
+
+
+...
+
+
+
+

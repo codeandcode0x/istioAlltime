@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: initdata-job
+  labels:
+    job-name: initdata-job
+spec:
+  backoffLimit: 10
+  activeDeadlineSeconds: 10000
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      priorityClassName: nocalhost-container-critical
+      initContainers:
+      - name: wait-for-onezone
+        image: codingcorp-docker.pkg.coding.net/nocalhost/public/nocalhost-wait:latest
+        imagePullPolicy: IfNotPresent
+        args:
+          - "pod"
+          - "-lapp=mariadb"
+      containers:
+      - name: initdata-job
+        image: roandocker/initdata-job:latest
+        # command: ["/bin/bash", "/app/initdata.sh"]
+        # args: ["istioAlltime/data", "ticket"]
+        env:
+        - name: MARIADB_SERVICE_HOST
+          value: "mariadb"
+        - name: SQL_FILE
+          value: "istioAlltime"
+        - name: GIT_BRANCH
+          value: "master"
+        - name: GITURL
+          value: "github.com/codeandcode0x/istioAlltime.git"
+        - name: GITUSER
+          value: ""
+        - name: GITPASSWD
+          value : ""
+        - name: MIGRATION
+          value: "MARIADB_SERVICE_HOST"
+        - name: DBUSER
+          value: "root"
+        - name: DBPASSWD
+          value: "root123"
+        - name: INTERVAL_TIME
+          value: "5"
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
+        imagePullPolicy: Always
+      restartPolicy: OnFailure
+      # imagePullSecrets:
+      # - name: codingcorp-registry-cred
