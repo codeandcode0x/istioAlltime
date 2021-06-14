@@ -37,7 +37,6 @@ spec:
           value : http://ticket-manager:8080
         image: roandocker/ticket-frontend:latest
         imagePullPolicy: Always
-        # command: ["/bin/sh", "-c", "java -jar /root/ticket-frontend.jar"]
         livenessProbe:
           initialDelaySeconds: 30
           periodSeconds: 10

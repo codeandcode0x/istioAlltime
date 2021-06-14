@@ -47,7 +47,6 @@ spec:
           value: "true"
         image: roandocker/ticket-manager:latest
         imagePullPolicy: Always
-        # command: ["/bin/sh","-c", "/root/ticket-manager"]
         livenessProbe:
           initialDelaySeconds: 30
           periodSeconds: 10

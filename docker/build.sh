@@ -16,6 +16,7 @@ function build() {
 	docker build -t $repoUser/ticket-manager:$version -f docker/projects/golang/ticket-manager/Dockerfile  --no-cache projects/golang/ticket-manager/
 	docker build -t $repoUser/ticket-frontend:$version -f docker/projects/java/ticket-frontend/Dockerfile  --no-cache projects/java/ticket-frontend/
 	docker build -t $repoUser/initdata-job:$version -f docker/projects/job/initdata-job/Dockerfile --no-cache  projects/job/initdata-job
+	docker build -t $repoUser/pod-wait:$version -f docker/tools/pod-wait/Dockerfile --no-cache  docker/tools/pod-wait
 }
 
 # prune image
@@ -29,7 +30,9 @@ function push() {
 	docker push $repoUser/ticket-manager:$version
 	docker push $repoUser/ticket-frontend:$version
 	docker push $repoUser/initdata-job:$version
+	docker push $repoUser/pod-wait:$version
 }
+
 
 
 #main 
