@@ -1,3 +1,3 @@
 # Istio
 
-## tracing
+## Install Istio
