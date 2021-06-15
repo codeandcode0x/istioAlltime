@@ -48,12 +48,14 @@ spec:
           periodSeconds: 10
           timeoutSeconds: 3
         resources:
+        {{- if .Values.global.resourceRequest.enabled }}
           limits:
             cpu: 350m
             memory: 680Mi
           requests:
             cpu: 50m
             memory: 256Mi
+        {{- end }}
         env:
         - name: MARIADB_ROOT_PASSWORD
           value : root123

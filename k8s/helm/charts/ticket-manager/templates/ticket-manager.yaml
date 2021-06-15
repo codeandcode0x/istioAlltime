@@ -65,12 +65,14 @@ spec:
           timeoutSeconds: 3
           failureThreshold: 30
         resources:
+        {{- if .Values.global.resourceRequest.enabled }}
           limits:
             cpu: 200m
             memory: 680Mi
           requests:
             cpu: 100m
             memory: 256Mi
+        {{- end }}
       enableServiceLinks: false
       # imagePullSecrets:
       # - name: codingcorp-registry-cred
