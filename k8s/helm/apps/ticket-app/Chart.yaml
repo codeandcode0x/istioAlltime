@@ -23,3 +23,6 @@ dependencies:
   - name: ticket-frontend
     version: 1.0.0
     repository: "file://../../charts/ticket-frontend"
+  - name: ticket-cronjob
+    version: 1.0.0
+    repository: "file://../../charts/ticket-cronjob"
