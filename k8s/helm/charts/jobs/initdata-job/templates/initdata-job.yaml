@@ -4,6 +4,7 @@ metadata:
   name: initdata-job
   labels:
     job-name: initdata-job
+    version: {{ .Chart.AppVersion }}
 spec:
   backoffLimit: 10
   activeDeadlineSeconds: 10000

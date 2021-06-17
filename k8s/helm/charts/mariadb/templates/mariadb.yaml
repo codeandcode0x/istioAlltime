@@ -3,6 +3,8 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mariadb
+  labels:
+    version: {{ .Chart.AppVersion }}
 spec:
   updateStrategy:
     type: RollingUpdate

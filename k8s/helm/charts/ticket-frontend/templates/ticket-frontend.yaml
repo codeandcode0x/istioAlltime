@@ -4,6 +4,8 @@ metadata:
   annotations:
     dependOn: ticket-frontend
   name: ticket-frontend
+  labels:
+    version: {{ .Chart.AppVersion }}
 spec:
   replicas: 1
   selector:

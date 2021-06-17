@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - host: '*.ticket.com'
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          serviceName: ticket-frontend
+          servicePort: 8090

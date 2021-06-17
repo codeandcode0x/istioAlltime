@@ -4,6 +4,8 @@ metadata:
   annotations:
     dependOn: ticket-cronjob
   name: ticket-cronjob
+  labels:
+    version: {{ .Chart.AppVersion }}
 spec:
   replicas: 1
   selector:

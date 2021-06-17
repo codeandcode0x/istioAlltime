@@ -1,0 +1,56 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: ticket-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ticket-frontend-vs
+spec:
+  hosts:
+  - "www.ticket.com"
+  gateways:
+  - ticket-gateway
+  http:
+  - name: "tocket-frontend"
+    match:
+    - uri:
+        prefix: "/"
+    route:
+    - destination:
+        host: ticket-frontend
+        port:
+          number: 8090  
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ticket-manager-vs
+spec:
+  hosts:
+  - "admin.ticket.com"
+  gateways:
+  - ticket-gateway
+  http:
+  - name: "ticket-manager"
+    match:
+    - uri:
+        prefix: "/"
+    route:
+    - destination:
+        host: ticket-manager
+        port:
+          number: 8080  

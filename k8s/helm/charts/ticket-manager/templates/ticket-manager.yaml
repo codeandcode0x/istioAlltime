@@ -4,6 +4,8 @@ metadata:
   annotations:
     dependOn: ticket-manager
   name: ticket-manager
+  labels:
+    version: {{ .Chart.AppVersion }}
 spec:
   replicas: 1
   selector:
