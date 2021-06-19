@@ -1,12 +1,11 @@
 package service
 
 import (
-	"fmt"
 	"ticket-manager/model"
 )
 
 type UserService struct {
-	Model  *model.User
+	Model *model.User
 }
 
 // get user service
@@ -36,14 +35,17 @@ func (u *UserService) CreateUser(user *model.User) (uint64, error) {
 }
 
 // update user
-func (u *UserService) UpdateUser(uid uint64, user *model.User ) (int64, error) {
+func (u *UserService) UpdateUser(uid uint64, user *model.User) (int64, error) {
 	rowsAffected, err := u.getUserService().Model.Update(uid, user)
 	return rowsAffected, err
 }
 
 // delete user
 func (u *UserService) DeleteUser(uid uint64) (int64, error) {
-	fmt.Println("uid", uid)
 	return u.getUserService().Model.Delete(uid)
 }
 
+// find all users
+func (s *UserService) FindAllUserByPages(currentPage, pageSize int) ([]model.User, error) {
+	return s.getUserService().Model.FindByPages(currentPage, pageSize)
+}

@@ -28,29 +28,35 @@ type ShowModel interface {
 	FindByName(name string) (*Show, error)
 }
 
-func (u *Show) Create(show *Show) (uint64, error) {
-	result := db.DBConn.Model(&Show{}).Create(&show)
-	return show.ID, result.Error
+func (u *Show) Create(instance *Show) (uint64, error) {
+	result := db.Conn.Model(&Show{}).Create(&instance)
+	return instance.ID, result.Error
 }
 
-func (u *Show) Update(id uint64, show *Show) (int64, error) {
-	result := db.DBConn.Model(&Show{}).Where("id = ?", id).Save(&show)
+func (u *Show) Update(id uint64, instance *Show) (int64, error) {
+	result := db.Conn.Model(&Show{}).Where("id = ?", id).Save(&instance)
 	return result.RowsAffected, result.Error
 }
 
 func (u *Show) Delete(id uint64) (int64, error) {
-	result := db.DBConn.Model(&Show{}).Where("id = ?", id).Delete(&Show{})
+	result := db.Conn.Model(&Show{}).Where("id = ?", id).Delete(&Show{})
 	return result.RowsAffected, result.Error
 }
 
 func (u *Show) FindAll(mtype string, count int) ([]Show, error) {
 	var Shows []Show
-	result := db.DBConn.Model(&Show{}).Where("mtype", mtype).Order("id desc").Limit(count).Find(&Shows)
+	result := db.Conn.Model(&Show{}).Where("mtype", mtype).Order("id desc").Limit(count).Find(&Shows)
 	return Shows, result.Error
 }
 
 func (u *Show) FindByID(id uint64) (*Show, error) {
-	var show *Show
-	result := db.DBConn.Model(&Show{}).First(&show, id)
-	return show, result.Error
+	var instance *Show
+	result := db.Conn.Model(&Show{}).First(&instance, id)
+	return instance, result.Error
+}
+
+func (u *Show) FindByPages(currentPage, pageSize int) ([]Show, error) {
+	var instances []Show
+	result := Paginate(currentPage, pageSize).Model(&Show{}).Find(&instances)
+	return instances, result.Error
 }

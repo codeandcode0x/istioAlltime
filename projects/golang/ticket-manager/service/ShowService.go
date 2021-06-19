@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"ticket-manager/model"
 )
 
@@ -38,6 +37,5 @@ func (u *ShowService) UpdateShow(uid uint64, Show *model.Show) (int64, error) {
 
 // delete Show
 func (u *ShowService) DeleteShow(uid uint64) (int64, error) {
-	fmt.Println("uid", uid)
 	return u.getShowService().Model.Delete(uid)
 }

@@ -1,6 +1,6 @@
 package model
 
-import . "ticket-manager/db"
+import "ticket-manager/db"
 
 // init
 func init() {
@@ -9,8 +9,9 @@ func init() {
 
 // Migrate Model
 func AutoMigrateAll() {
-	_ = DBConn.Table("users").AutoMigrate(&User{})
-	_ = DBConn.Table("movies").AutoMigrate(&Movie{})
-	_ = DBConn.Table("shows").AutoMigrate(&Show{})
-	_ = DBConn.Table("infos").AutoMigrate(&Info{})
+	_ = db.Conn.Table("users").AutoMigrate(&User{})
+	_ = db.Conn.Table("movies").AutoMigrate(&Movie{})
+	_ = db.Conn.Table("shows").AutoMigrate(&Show{})
+	_ = db.Conn.Table("infos").AutoMigrate(&Info{})
+	_ = db.Conn.Table("orders").AutoMigrate(&Order{})
 }

@@ -36,6 +36,7 @@ func DefinitionRoute(router *gin.Engine) {
 	var userController *controller.UserController
 	var showController *controller.ShowController
 	var infoController *controller.InfoController
+	var orderController *controller.OrderController
 
 	auth := router.Group("/")
 	auth.Use(middleware.AuthMiddle())
@@ -78,6 +79,11 @@ func DefinitionRoute(router *gin.Engine) {
 	api.GET("/users", userController.GetAllUsers)
 	api.GET("/shows", showController.GetAllShows)
 	api.GET("/infos", infoController.GetAllInfos)
+
+	api.GET("/orders", orderController.GetOrderByPages)
+	api.POST("/order/create", orderController.CreateOrder)
+	// api.POST("/order/create", orderController.GetOrderByPages)
+
 	api.GET("/healthz", homeController.Healthz)
 }
 

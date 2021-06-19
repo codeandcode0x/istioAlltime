@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"ticket-manager/model"
 )
 
@@ -38,6 +37,5 @@ func (u *InfoService) UpdateInfo(uid uint64, Info *model.Info) (int64, error) {
 
 // delete Info
 func (u *InfoService) DeleteInfo(uid uint64) (int64, error) {
-	fmt.Println("uid", uid)
 	return u.getInfoService().Model.Delete(uid)
 }

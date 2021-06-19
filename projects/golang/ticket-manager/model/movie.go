@@ -28,29 +28,35 @@ type MovieModel interface {
 	FindByName(name string) (*Movie, error)
 }
 
-func (u *Movie) Create(movie *Movie) (uint64, error) {
-	result := db.DBConn.Model(&Movie{}).Create(&movie)
-	return movie.ID, result.Error
+func (u *Movie) Create(instance *Movie) (uint64, error) {
+	result := db.Conn.Model(&Movie{}).Create(&instance)
+	return instance.ID, result.Error
 }
 
-func (u *Movie) Update(id uint64, movie *Movie) (int64, error) {
-	result := db.DBConn.Model(&Movie{}).Where("id = ?", id).Save(&movie)
+func (u *Movie) Update(id uint64, instance *Movie) (int64, error) {
+	result := db.Conn.Model(&Movie{}).Where("id = ?", id).Save(&instance)
 	return result.RowsAffected, result.Error
 }
 
 func (u *Movie) Delete(id uint64) (int64, error) {
-	result := db.DBConn.Model(&Movie{}).Where("id = ?", id).Delete(&Movie{})
+	result := db.Conn.Model(&Movie{}).Where("id = ?", id).Delete(&Movie{})
 	return result.RowsAffected, result.Error
 }
 
 func (u *Movie) FindAll(count int) ([]Movie, error) {
 	var Movies []Movie
-	result := db.DBConn.Model(&Movie{}).Order("id desc").Limit(count).Find(&Movies)
+	result := db.Conn.Model(&Movie{}).Order("id desc").Limit(count).Find(&Movies)
 	return Movies, result.Error
 }
 
 func (u *Movie) FindByID(id uint64) (*Movie, error) {
-	var movie *Movie
-	result := db.DBConn.Model(&Movie{}).First(&movie, id)
-	return movie, result.Error
+	var instance *Movie
+	result := db.Conn.Model(&Movie{}).First(&instance, id)
+	return instance, result.Error
+}
+
+func (u *Movie) FindByPages(currentPage, pageSize int) ([]Movie, error) {
+	var instances []Movie
+	result := Paginate(currentPage, pageSize).Model(&Movie{}).Find(&instances)
+	return instances, result.Error
 }

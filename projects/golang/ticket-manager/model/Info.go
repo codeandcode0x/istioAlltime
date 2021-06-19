@@ -28,29 +28,35 @@ type InfoModel interface {
 	FindByName(name string) (*Info, error)
 }
 
-func (u *Info) Create(info *Info) (uint64, error) {
-	result := db.DBConn.Model(&Info{}).Create(&info)
-	return info.ID, result.Error
+func (u *Info) Create(instance *Info) (uint64, error) {
+	result := db.Conn.Model(&Info{}).Create(&instance)
+	return instance.ID, result.Error
 }
 
-func (u *Info) Update(id uint64, info *Info) (int64, error) {
-	result := db.DBConn.Model(&Info{}).Where("id = ?", id).Save(&info)
+func (u *Info) Update(id uint64, instance *Info) (int64, error) {
+	result := db.Conn.Model(&Info{}).Where("id = ?", id).Save(&instance)
 	return result.RowsAffected, result.Error
 }
 
 func (u *Info) Delete(id uint64) (int64, error) {
-	result := db.DBConn.Model(&Info{}).Where("id = ?", id).Delete(&Info{})
+	result := db.Conn.Model(&Info{}).Where("id = ?", id).Delete(&Info{})
 	return result.RowsAffected, result.Error
 }
 
 func (u *Info) FindAll(count int) ([]Info, error) {
 	var Infos []Info
-	result := db.DBConn.Model(&Info{}).Order("id desc").Limit(count).Find(&Infos)
+	result := db.Conn.Model(&Info{}).Order("id desc").Limit(count).Find(&Infos)
 	return Infos, result.Error
 }
 
 func (u *Info) FindByID(id uint64) (*Info, error) {
-	var info *Info
-	result := db.DBConn.Model(&Info{}).First(&info, id)
-	return info, result.Error
+	var instance *Info
+	result := db.Conn.Model(&Info{}).First(&instance, id)
+	return instance, result.Error
+}
+
+func (u *Info) FindByPages(currentPage, pageSize int) ([]Info, error) {
+	var users []Info
+	result := Paginate(currentPage, pageSize).Model(&Info{}).Find(&users)
+	return users, result.Error
 }

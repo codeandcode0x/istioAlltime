@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// user entity
+// instance entity
 type User struct {
 	ID           uint64         `json:"id,omitempty"`
 	Name         string         `json:"name,omitempty" gorm:"type:varchar(255)"`
@@ -21,50 +21,57 @@ type User struct {
 	gorm.Model
 }
 
-// user model
+// instance model
 type UserModel interface {
-	Create(user *User) (*User, error)
-	Update(uid uint64, user *User) (*User, error)
+	Create(instance *User) (*User, error)
+	Update(uid uint64, instance *User) (*User, error)
 	Delete(uid uint64) (uint64, error)
 	FindAll() ([]User, error)
 	FindByID(uid uint64) (*User, error)
 	FindByName(name string) (*User, error)
 	FindByEmail(email string) (*User, error)
+	FindByPages(currentPage, pageSize int) ([]User, error)
 }
 
-func (u *User) Create(user *User) (uint64, error) {
-	result := db.DBConn.Model(&User{}).Create(&user)
-	return user.ID, result.Error
+func (u *User) Create(instance *User) (uint64, error) {
+	result := db.Conn.Model(&User{}).Create(&instance)
+	return instance.ID, result.Error
 }
 
-func (u *User) Update(uid uint64, user *User) (int64, error) {
-	result := db.DBConn.Model(&User{}).Where("id = ?", uid).Save(&user)
+func (u *User) Update(uid uint64, instance *User) (int64, error) {
+	result := db.Conn.Model(&User{}).Where("id = ?", uid).Save(&instance)
 	return result.RowsAffected, result.Error
 }
 
 func (u *User) Delete(uid uint64) (int64, error) {
-	result := db.DBConn.Model(&User{}).Where("id = ?", uid).Delete(&User{})
+	result := db.Conn.Model(&User{}).Where("id = ?", uid).Delete(&User{})
 	return result.RowsAffected, result.Error
 }
 
 func (u *User) FindAll() ([]User, error) {
-	var users []User
-	result := db.DBConn.Model(&User{}).Order("id desc").Find(&users)
-	return users, result.Error
+	var instances []User
+	result := db.Conn.Model(&User{}).Order("id desc").Find(&instances)
+	return instances, result.Error
 }
 
 func (u *User) FindByID(uid uint64) (*User, error) {
-	var user *User
-	result := db.DBConn.Model(&User{}).First(&user, uid)
-	return user, result.Error
+	var instance *User
+	result := db.Conn.Model(&User{}).First(&instance, uid)
+	return instance, result.Error
 }
 
 func (u *User) FindByEmail(email string) (*User, error) {
-	var user *User
-	result := db.DBConn.Model(&User{}).Where("email", email).First(&user)
-	return user, result.Error
+	var instance *User
+	result := db.Conn.Model(&User{}).Where("email", email).First(&instance)
+	return instance, result.Error
 }
 
 func (u *User) FindByName(name string) (*User, error) {
 	return &User{}, nil
+}
+
+func (u *User) FindByPages(currentPage, pageSize int) ([]User, error) {
+	var instances []User
+	result := Paginate(currentPage, pageSize).Model(&User{}).Find(&instances)
+	return instances, result.Error
 }

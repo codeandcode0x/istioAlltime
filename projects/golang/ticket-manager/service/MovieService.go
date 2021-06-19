@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"ticket-manager/model"
 )
 
@@ -38,6 +37,5 @@ func (u *MovieService) UpdateMovie(uid uint64, Movie *model.Movie) (int64, error
 
 // delete Movie
 func (u *MovieService) DeleteMovie(uid uint64) (int64, error) {
-	fmt.Println("uid", uid)
 	return u.getMovieService().Model.Delete(uid)
 }
