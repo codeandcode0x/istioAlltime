@@ -9,7 +9,7 @@ import (
 	"ticket-manager/util"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
+	"github.com/spf13/viper"
 )
 
 type InfoController struct {
@@ -19,7 +19,7 @@ type InfoController struct {
 }
 
 // get controller
-func (uc *InfoController) getInfoController(c *gin.Context) *InfoController {
+func (uc *InfoController) getCtl(c *gin.Context) *InfoController {
 	errorCode, _ := c.Get("errorCode")
 	if errorCode == http.StatusGatewayTimeout {
 		return nil
@@ -38,20 +38,20 @@ func (uc *InfoController) CreateInfo(c *gin.Context) {
 	mtime := c.PostForm("mtime")
 	//mtype, _ :=  strconv.Atoi(c.PostForm("age"))
 	info := &model.Info{
-		Image:   image,
-		Title:   title,
-		Content: content,
-		Mtype:   mtype,
-		Minfo:   minfo,
-		Mtime:   mtime,
-		Model:   gorm.Model{},
+		Image:     image,
+		Title:     title,
+		Content:   content,
+		Mtype:     mtype,
+		Minfo:     minfo,
+		Mtime:     mtime,
+		BaseModel: model.BaseModel{},
 	}
 
 	// return error
-	if uc.getInfoController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
-	infoId, err := uc.getInfoController(c).Service.CreateInfo(info)
+	err := uc.getCtl(c).Service.CreateInfo(info)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,
@@ -61,23 +61,28 @@ func (uc *InfoController) CreateInfo(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 0,
-		"id":   infoId,
 		"data": info,
 	})
 }
 
 // get all infos
 func (uc *InfoController) GetAllInfos(c *gin.Context) {
-	count := 10
-	countStr, exists := c.GetQuery("count")
-	if exists {
-		count, _ = strconv.Atoi(countStr)
+	var currentpage, pagesize int
+	pagesize = viper.GetInt("PAGE_SIZE")
+	currentPageStr, pageExists := c.GetQuery("currentpage")
+	if pageExists {
+		currentpage, _ = strconv.Atoi(currentPageStr)
+	}
+	// get page size
+	pageSizeStr, pageSizeExists := c.GetQuery("pagesize")
+	if pageSizeExists {
+		pagesize, _ = strconv.Atoi(pageSizeStr)
 	}
 	// return error
-	if uc.getInfoController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
-	infos, err := uc.getInfoController(c).Service.FindAllInfos(count)
+	infos, err := uc.getCtl(c).Service.FindInfoByPages(currentpage, pagesize)
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
@@ -106,11 +111,11 @@ func (uc *InfoController) GetInfoByID(c *gin.Context) {
 	idUint64, _ := strconv.ParseUint(id, 10, 64)
 
 	// return error
-	if uc.getInfoController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
 
-	info, err := uc.getInfoController(c).Service.FindInfoById(idUint64)
+	info, err := uc.getCtl(c).Service.FindInfoById(idUint64)
 	if err != nil {
 		util.SendError(c, err.Error())
 		return
@@ -132,16 +137,16 @@ func (uc *InfoController) UpdateInfo(c *gin.Context) {
 		})
 	}
 
-	uid_unit64, errConv := strconv.ParseUint(uid, 10, 64)
+	uidUint64, errConv := strconv.ParseUint(uid, 10, 64)
 	if errConv != nil {
 		panic(" get uid error !")
 	}
 
 	// return error
-	if uc.getInfoController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
-	info, err := uc.getInfoController(c).Service.FindInfoById(uid_unit64)
+	info, err := uc.getCtl(c).Service.FindInfoById(uidUint64)
 	if err != nil {
 		panic(" get Info error !")
 	}
@@ -153,6 +158,7 @@ func (uc *InfoController) UpdateInfo(c *gin.Context) {
 	minfo := c.PostForm("minfo")
 	mtime := c.PostForm("mtime")
 
+	info.ID = uidUint64
 	info.Image = image
 	info.Title = title
 	info.Content = content
@@ -161,11 +167,11 @@ func (uc *InfoController) UpdateInfo(c *gin.Context) {
 	info.Mtime = mtime
 
 	// return error
-	if uc.getInfoController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
 
-	rowsAffected, updateErr := uc.getInfoController(c).Service.UpdateInfo(uid_unit64, info)
+	rowsAffected, updateErr := uc.getCtl(c).Service.UpdateInfo(info)
 	if updateErr != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,
@@ -189,17 +195,17 @@ func (uc *InfoController) DeleteInfo(c *gin.Context) {
 		})
 	}
 	fmt.Println("uid", uid)
-	uid_unit64, errConv := strconv.ParseUint(uid, 10, 64)
+	uidUint64, errConv := strconv.ParseUint(uid, 10, 64)
 	if errConv != nil {
 		panic(" get uid error !")
 	}
 
 	// return error
-	if uc.getInfoController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
 
-	rowsAffected, delErr := uc.getInfoController(c).Service.DeleteInfo(uid_unit64)
+	rowsAffected, delErr := uc.getCtl(c).Service.DeleteInfo(uidUint64)
 
 	if delErr != nil {
 		c.JSON(http.StatusOK, gin.H{
@@ -213,27 +219,3 @@ func (uc *InfoController) DeleteInfo(c *gin.Context) {
 		"data": rowsAffected,
 	})
 }
-
-// rpc
-// get all infos
-// func (uc *InfoController) GetAllInfosRPC(c *gin.Context) {
-// 	conn, err := grpc.Dial(":20153", grpc.WithInsecure())
-// 	if err != nil {
-// 		fmt.Printf("faild to connect: %v", err)
-// 	}
-// 	defer conn.Close()
-
-// 	rpcClient := info.NewInfoRPCClient(conn)
-// 	rpcResponse, err := rpcClient.GetAllInfos(context.Background(), &info.InfoMsgRequest{Count: 100})
-// 	if err != nil {
-// 		log.Printf("could not request: %v", err)
-// 	}
-
-// 	infos := []model.Info{}
-// 	json.Unmarshal([]byte(rpcResponse.Message), &infos)
-// 	log.Printf("info list : %s !\n", rpcResponse.Message)
-// 	c.JSON(http.StatusOK, gin.H{
-// 		"code": 0,
-// 		"data": infos,
-// 	})
-// }

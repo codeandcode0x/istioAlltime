@@ -12,8 +12,8 @@ import (
 	"ticket-manager/util"
 
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 	"google.golang.org/grpc"
-	"gorm.io/gorm"
 
 	movie "ticket-manager/rpc/grpc/protos/movie"
 )
@@ -25,7 +25,7 @@ type MovieController struct {
 }
 
 // get controller
-func (uc *MovieController) getMovieController(c *gin.Context) *MovieController {
+func (uc *MovieController) getCtl(c *gin.Context) *MovieController {
 	errorCode, _ := c.Get("errorCode")
 	if errorCode == http.StatusGatewayTimeout {
 		return nil
@@ -44,20 +44,20 @@ func (uc *MovieController) CreateMovie(c *gin.Context) {
 	mtime := c.PostForm("mtime")
 	//mtype, _ :=  strconv.Atoi(c.PostForm("age"))
 	movie := &model.Movie{
-		Name:   name,
-		Image:  image,
-		Actors: actors,
-		Mtype:  mtype,
-		Minfo:  minfo,
-		Mtime:  mtime,
-		Model:  gorm.Model{},
+		Name:      name,
+		Image:     image,
+		Actors:    actors,
+		Mtype:     mtype,
+		Minfo:     minfo,
+		Mtime:     mtime,
+		BaseModel: model.BaseModel{},
 	}
 
 	// return error
-	if uc.getMovieController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
-	movieId, err := uc.getMovieController(c).Service.CreateMovie(movie)
+	err := uc.getCtl(c).Service.CreateMovie(movie)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,
@@ -67,23 +67,29 @@ func (uc *MovieController) CreateMovie(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 0,
-		"id":   movieId,
 		"data": movie,
 	})
 }
 
 // get all movies
 func (uc *MovieController) GetAllMovies(c *gin.Context) {
-	count := 10
-	countStr, exists := c.GetQuery("count")
-	if exists {
-		count, _ = strconv.Atoi(countStr)
+	var currentpage, pagesize int
+	pagesize = viper.GetInt("PAGE_SIZE")
+	currentPageStr, pageExists := c.GetQuery("currentpage")
+	if pageExists {
+		currentpage, _ = strconv.Atoi(currentPageStr)
 	}
+	// get page size
+	pageSizeStr, pageSizeExists := c.GetQuery("pagesize")
+	if pageSizeExists {
+		pagesize, _ = strconv.Atoi(pageSizeStr)
+	}
+
 	// return error
-	if uc.getMovieController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
-	movies, err := uc.getMovieController(c).Service.FindAllMovies(count)
+	movies, err := uc.getCtl(c).Service.FindMovieByPages(currentpage, pagesize)
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
@@ -112,11 +118,11 @@ func (uc *MovieController) GetMovieByID(c *gin.Context) {
 	idUint64, _ := strconv.ParseUint(id, 10, 64)
 
 	// return error
-	if uc.getMovieController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
 
-	movie, err := uc.getMovieController(c).Service.FindMovieById(idUint64)
+	movie, err := uc.getCtl(c).Service.FindMovieById(idUint64)
 	if err != nil {
 		util.SendError(c, err.Error())
 		return
@@ -138,16 +144,16 @@ func (uc *MovieController) UpdateMovie(c *gin.Context) {
 		})
 	}
 
-	uid_unit64, errConv := strconv.ParseUint(uid, 10, 64)
+	uidUint64, errConv := strconv.ParseUint(uid, 10, 64)
 	if errConv != nil {
 		panic(" get uid error !")
 	}
 
 	// return error
-	if uc.getMovieController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
-	movie, err := uc.getMovieController(c).Service.FindMovieById(uid_unit64)
+	movie, err := uc.getCtl(c).Service.FindMovieById(uidUint64)
 	if err != nil {
 		panic(" get Movie error !")
 	}
@@ -159,6 +165,7 @@ func (uc *MovieController) UpdateMovie(c *gin.Context) {
 	minfo := c.PostForm("minfo")
 	mtime := c.PostForm("mtime")
 
+	movie.ID = uidUint64
 	movie.Name = name
 	movie.Image = image
 	movie.Actors = actors
@@ -167,11 +174,11 @@ func (uc *MovieController) UpdateMovie(c *gin.Context) {
 	movie.Mtime = mtime
 
 	// return error
-	if uc.getMovieController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
 
-	rowsAffected, updateErr := uc.getMovieController(c).Service.UpdateMovie(uid_unit64, movie)
+	rowsAffected, updateErr := uc.getCtl(c).Service.UpdateMovie(movie)
 	if updateErr != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,
@@ -195,17 +202,17 @@ func (uc *MovieController) DeleteMovie(c *gin.Context) {
 		})
 	}
 	fmt.Println("uid", uid)
-	uid_unit64, errConv := strconv.ParseUint(uid, 10, 64)
+	uidUint64, errConv := strconv.ParseUint(uid, 10, 64)
 	if errConv != nil {
 		panic(" get uid error !")
 	}
 
 	// return error
-	if uc.getMovieController(c) == nil {
+	if uc.getCtl(c) == nil {
 		return
 	}
 
-	rowsAffected, delErr := uc.getMovieController(c).Service.DeleteMovie(uid_unit64)
+	rowsAffected, delErr := uc.getCtl(c).Service.DeleteMovie(uidUint64)
 
 	if delErr != nil {
 		c.JSON(http.StatusOK, gin.H{

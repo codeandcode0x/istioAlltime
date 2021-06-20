@@ -14,3 +14,5 @@ DB_LOGMODE: false
 DebugMode: true
 # Log Level
 LogLevel: 'debug'
+# Default Page Size
+PAGE_SIZE: 10

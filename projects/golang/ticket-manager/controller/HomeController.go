@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -61,6 +62,7 @@ func (hc *HomeController) Logout(c *gin.Context) {
 func (hc *HomeController) ProxyHome(c *gin.Context) {
 	var us *service.UserService
 	var ms *service.MovieService
+	pagesize := viper.GetInt("PAGE_SIZE")
 	users, errUsers := us.FindAllUsers()
 	if errUsers != nil {
 		c.JSON(http.StatusOK, gin.H{
@@ -69,7 +71,7 @@ func (hc *HomeController) ProxyHome(c *gin.Context) {
 		})
 	}
 
-	movies, errMovies := ms.FindAllMovies(10)
+	movies, errMovies := ms.FindMovieByPages(1, pagesize)
 	if errMovies != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,
@@ -108,7 +110,8 @@ func (hc *HomeController) AddUser(c *gin.Context) {
 
 func (hc *HomeController) MovieList(c *gin.Context) {
 	var ms *service.MovieService
-	movies, errMovies := ms.FindAllMovies(10)
+	pagesize := viper.GetInt("PAGE_SIZE")
+	movies, errMovies := ms.FindMovieByPages(1, pagesize)
 	if errMovies != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,
@@ -130,7 +133,8 @@ func (hc *HomeController) AddMovie(c *gin.Context) {
 
 func (hc *HomeController) ShowList(c *gin.Context) {
 	var ms *service.ShowService
-	shows, errShows := ms.FindAllShows("演唱会", 10)
+	pagesize := viper.GetInt("PAGE_SIZE")
+	shows, errShows := ms.FindShowByPagesWithKeys("演唱会", 1, pagesize)
 	if errShows != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,
@@ -152,7 +156,8 @@ func (hc *HomeController) AddShow(c *gin.Context) {
 
 func (hc *HomeController) InfoList(c *gin.Context) {
 	var ms *service.InfoService
-	infos, errInfo := ms.FindAllInfos(10)
+	pagesize := viper.GetInt("PAGE_SIZE")
+	infos, errInfo := ms.FindInfoByPages(1, pagesize)
 	if errInfo != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  -1,
