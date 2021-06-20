@@ -3,12 +3,20 @@
 set -eo pipefail
 
 appVersion=$1
+repoUser=$2
+repoHost=$3
 
 if [ ! $appVersion ]; then
   appVersion="latest" 
 fi
 
-repoUser="roandocker"
+if [ ! $repoUser ]; then
+  repoUser="roandocker" 
+fi
+
+if [ ! $repoHost ]; then
+  repoHost="docker.io" 
+fi
 
 # build image
 function build() {
@@ -27,10 +35,12 @@ function prune() {
 # push image
 function push() {
 	version=$1
-	docker push $repoUser/ticket-manager:$version
-	docker push $repoUser/ticket-frontend:$version
-	docker push $repoUser/initdata-job:$version
-	docker push $repoUser/k8s-wait-for:$version
+	repoUser=$2
+	repoHost=$3
+	docker push $repoHost/$repoUser/ticket-manager:$version
+	docker push $repoHost/$repoUser/ticket-frontend:$version
+	docker push $repoHost/$repoUser/initdata-job:$version
+	docker push $repoHost/$repoUser/k8s-wait-for:$version
 }
 
 
@@ -39,10 +49,10 @@ function push() {
 function main() {
 	build $1 $2
 	prune
-	push $1 $2
+	push $1 $2 $3
 }
 
 # run main
-main $appVersion $repoUser
+main $appVersion $repoUser $repoHost
 
 export TICKET_VERSION=$appVersion

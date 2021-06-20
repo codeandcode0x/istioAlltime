@@ -25,6 +25,7 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: mariadb
+        version: {{ .Chart.AppVersion }}
     spec:
       {{- if .Values.mariadb.pvcEnabled }}
         {{- if eq .Values.mariadb.pvcMode "HOSTPATH" }}

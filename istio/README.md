@@ -20,5 +20,7 @@ kubectl patch svc ingress-nginx-controller -n nginx-ingress -p '{"spec": {"type"
 
 ```
 
+kubectl patch svc nginx-controller-nginx-ingress -n nginx-ingress -p '{"spec": {"type": "LoadBalancer", "externalIPs":["139.9.166.178"]}}'
+
 
 

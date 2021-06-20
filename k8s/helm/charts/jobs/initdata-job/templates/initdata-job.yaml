@@ -12,6 +12,8 @@ spec:
     metadata:
       annotations:
         sidecar.istio.io/inject: "false"
+      labels:
+        version: {{ .Chart.AppVersion }}
     spec:
       # priorityClassName: container-critical
       initContainers:

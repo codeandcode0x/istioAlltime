@@ -24,6 +24,7 @@ spec:
         sidecar.istio.io/inject: "true"
       labels:
         app: ticket-frontend
+        version: {{ .Chart.AppVersion }}
     spec:
       initContainers:
       - name: wait-for-onezone
