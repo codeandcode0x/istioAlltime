@@ -4,6 +4,8 @@
 
 # global env
 global:
+  docker:
+    repoHost: docker.io
   # resource
   resourceRequest:
     enabled: true

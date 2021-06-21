@@ -22,13 +22,14 @@ spec:
         sidecar.istio.io/proxyMemory: "32Mi"
         sidecar.istio.io/proxyMemoryLimit: "2Gi"
         sidecar.istio.io/inject: "true"
+        prometheus.io/probe: "true"
       labels:
         app: ticket-frontend
         version: {{ .Chart.AppVersion }}
     spec:
       initContainers:
       - name: wait-for-onezone
-        image: roandocker/k8s-wait-for:1.0.0
+        image: "{{ .Values.global.docker.repoHost }}/{{ .Values.image.k8sWaitFor }}"
         imagePullPolicy: IfNotPresent
         args:
           - "pod"
@@ -38,7 +39,7 @@ spec:
         env:
         - name: TICKET_MANAGER_HOST
           value : http://ticket-manager:8080
-        image: roandocker/ticket-frontend:1.0.0
+        image: "{{ .Values.global.docker.repoHost }}/{{ .Values.image.ticketFrontend }}"
         imagePullPolicy: Always
         # command: ["/bin/sh", "-c", "java -jar /root/ticket-frontend.jar"]
         livenessProbe:
@@ -76,6 +77,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ticket-frontend
+  annotations:
+    prometheus.io/probe: "true"
 spec:
   ports:
   - name: "http-8090"

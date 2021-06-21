@@ -4,6 +4,8 @@
 
 # global env
 global:
+  docker:
+    repoHost: docker.io
   # resource
   resourceRequest:
     enabled: true
@@ -12,3 +14,8 @@ global:
     sidecar:
       memLimit: "680Mi"
       inject: false
+
+# image 
+image:
+  initDataJob: "roandocker/initdata-job:1.0.0"
+  k8sWaitFor: "roandocker/k8s-wait-for:1.0.0"

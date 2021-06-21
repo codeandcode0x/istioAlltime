@@ -22,13 +22,14 @@ spec:
         sidecar.istio.io/proxyMemory: "32Mi"
         sidecar.istio.io/proxyMemoryLimit: "2Gi"
         sidecar.istio.io/inject: "true"
+        prometheus.io/probe: "true"
       labels:
         app: ticket-manager
         version: {{ .Chart.AppVersion }}
     spec:
       initContainers:
       - name: wait-for-onezone
-        image: roandocker/k8s-wait-for:1.0.0
+        image: "{{ .Values.global.docker.repoHost }}/{{ .Values.image.k8sWaitFor }}"
         imagePullPolicy: IfNotPresent
         args:
           - "job"
@@ -48,7 +49,7 @@ spec:
           value: ticket
         - name: DB_LOGMODE
           value: "true"
-        image: roandocker/ticket-manager:1.0.0
+        image: "{{ .Values.global.docker.repoHost }}/{{ .Values.image.ticketManager }}"
         imagePullPolicy: Always
         # command: ["/bin/sh","-c", "/root/ticket-manager"]
         livenessProbe:
@@ -84,6 +85,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ticket-manager
+  annotations:
+    prometheus.io/probe: "true"
 spec:
   ports:
   - name: "http-8080"
