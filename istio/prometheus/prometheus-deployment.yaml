@@ -13,7 +13,7 @@ spec:
     targetPort: 9090
   selector:
     app: prometheus
-  type: NodePort
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -45,10 +45,10 @@ spec:
           protocol: TCP
         resources:
           limits:
-            cpu: 200m
+            cpu: 500m
             memory: 680Mi
           requests:
-            cpu: 100m
+            cpu: 500m
             memory: 256Mi
         volumeMounts:
         - mountPath: "/etc/prometheus"

@@ -12,6 +12,12 @@ data:
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       kubernetes_sd_configs:
       - role: node
+      relabel_configs:
+      - source_labels: [__address__]
+        regex: '(.*):10250'
+        replacement: '${1}:9100'
+        target_label: __address__
+        action: replace
 
     - job_name: 'kubernetes-service'
       tls_config:
@@ -35,40 +41,71 @@ data:
       - role: ingress
 
     - job_name: 'kubernetes-pods'
-      tls_config:
-        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       kubernetes_sd_configs:
       - role: pod
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+        action: keep
+        regex: true
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+        action: replace
+        target_label: __metrics_path__
+        regex: (.+)
+      - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+        action: replace
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        replacement: $1:$2
+        target_label: __address__
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: kubernetes_pod_name
     
     - job_name: 'kubernetes-kubelet'
       scheme: https
       tls_config:
         ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        insecure_skip_verify: true
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       kubernetes_sd_configs:
       - role: node
       relabel_configs:
       - action: labelmap
         regex: __meta_kubernetes_node_label_(.+)
+      - target_label: __address__
+        replacement: kubernetes.default.svc:443
+      - source_labels: [__meta_kubernetes_node_name]
+        regex: (.+)
+        target_label: __metrics_path__
+        replacement: /api/v1/nodes/${1}/proxy/metrics
     
     - job_name: 'kubernetes-cadvisor'
       scheme: https
       tls_config:
         ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        insecure_skip_verify: true
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       kubernetes_sd_configs:
       - role: node
       relabel_configs:
+      - target_label: __address__
+        replacement: kubernetes.default.svc:443
       - source_labels: [__meta_kubernetes_node_name]
         regex: (.+)
         target_label: __metrics_path__
-        replacement: metrics/cadvisor
+        replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
       - action: labelmap
         regex: __meta_kubernetes_node_label_(.+)
-    
+      metric_relabel_configs:
+      - source_labels: [instance]
+        separator: ;
+        regex: (.+)
+        target_label: node
+        replacement: $1
+        action: replace
+
     - job_name: 'kubernetes-apiservers'
       kubernetes_sd_configs:
       - role: endpoints
@@ -130,7 +167,96 @@ data:
         target_label: kubernetes_namespace
       - source_labels: [__meta_kubernetes_ingress_name]
         target_label: kubernetes_name
+    
+    - job_name: 'kubernetes-service-endpoints'
+      kubernetes_sd_configs:
+      - role: endpoints
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+        action: keep
+        regex: true
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
+        action: replace
+        target_label: __scheme__
+        regex: (https?)
+      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
+        action: replace
+        target_label: __metrics_path__
+        regex: (.+)
+      - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
+        action: replace
+        target_label: __address__
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        replacement: $1:$2
+      - action: labelmap
+        regex: __meta_kubernetes_service_label_(.+)
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_service_name]
+        action: replace
+        target_label: kubernetes_name
+    
+    - job_name: 'etcd-manager'
+      kubernetes_sd_configs:
+      - role: pod
+      tls_config:
+        ca_file: /etc/prometheus/etcd-certs/etcd-clients-ca.crt
+        cert_file: /etc/prometheus/etcd-certs/prometheus-etcd.crt
+        key_file: /etc/prometheus/etcd-certs/prometheus-etcd.key
+        insecure_skip_verify: true
+      scheme: https
+      metrics_path: '/metrics'
+      relabel_configs:
+        - action: keep
+          regex: ^(etcd-manager-main-.*)$
+          source_labels:
+          - __meta_kubernetes_pod_name
+        - source_labels: [__address__]
+          action: replace
+          regex: (.+)
+          replacement: $1:4001
+          target_label: __address__
+        - source_labels: [__meta_kubernetes_pod_node_name]
+          action: replace
+          target_label: node_name
+        - source_labels: [__meta_kubernetes_pod_name]
+          action: replace
+          target_label: pod_name
+        - source_labels: [__meta_kubernetes_pod_container_name]
+          action: replace
+          target_label: container_name
+        - action: labelmap
+          regex: __meta_kubernetes_pod_label_(.+)
+          replacement: $1
 
+    - job_name: 'kube-state-metrics'
+      static_configs:
+        - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
+      kubernetes_sd_configs:
+      - role: endpoints
+        namespaces:
+          names:
+          - ops-monit
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_name]
+        regex: kube-state-metrics
+        replacement: $1
+        action: keep
+      - action: labelmap
+        regex: __meta_kubernetes_service_label_(.+)
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: k8s_namespace
+      - source_labels: [__meta_kubernetes_service_name]
+        action: replace
+        target_label: k8s_sname
+
+    - job_name: mysql
+      static_configs:
+      - targets: ['mysqld-exporter:9104']
+        labels:
+          instance: db1
 
 kind: ConfigMap
 metadata:

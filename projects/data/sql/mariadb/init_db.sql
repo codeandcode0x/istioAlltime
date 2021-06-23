@@ -1,2 +1,6 @@
 CREATE DATABASE IF NOT EXISTS ticket DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci;
 CREATE DATABASE IF NOT EXISTS ticket_job DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci;
+
+-- CREATE USER 'exporter'@'%' IDENTIFIED BY 'xylxydt@1234';
+-- GRANT PROCESS, REPLICATION CLIENT ON *.* TO 'exporter'@'%';
+-- GRANT SELECT ON performance_schema.* TO 'exporter'@'%';
