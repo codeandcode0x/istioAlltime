@@ -1,7 +1,6 @@
 package model
 
 import (
-	"log"
 	"ticket-manager/db"
 	"time"
 
@@ -72,8 +71,6 @@ func (u *BaseModel) FindAll(entity interface{}, opts ...DAOOption) error {
 	}
 
 	tx.Find(entity)
-
-	log.Println("length......", len(opts), opts, "entity,,,", entity)
 	return tx.Error
 }
 

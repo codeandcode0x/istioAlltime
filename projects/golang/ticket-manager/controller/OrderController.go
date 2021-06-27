@@ -6,6 +6,7 @@ import (
 	"ticket-manager/model"
 	"ticket-manager/service"
 
+	tracing "github.com/codeandcode0x/traceandtrace-go"
 	"github.com/gin-gonic/gin"
 )
 
@@ -69,6 +70,10 @@ func (uc *OrderController) GetAllOrders(c *gin.Context) {
 }
 
 func (uc *OrderController) GetOrderByPages(c *gin.Context) {
+	// add tracing
+	_, cancel := tracing.AddHttpTracing("OrderService", c.Request.Header, map[string]string{})
+	defer cancel()
+
 	orders, err := uc.getOrderController().Service.FindOrderByPages(1, 1)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{

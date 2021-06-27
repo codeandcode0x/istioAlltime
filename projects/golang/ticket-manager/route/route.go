@@ -18,6 +18,7 @@ func DefinitionRoute(router *gin.Engine) {
 	// middleware
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
+	router.Use(middleware.Tracing())
 	router.Use(middleware.UseCookieSession())
 	router.Use(middleware.TimeoutHandler(time.Second * TimeDuration))
 	// no route

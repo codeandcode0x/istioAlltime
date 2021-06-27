@@ -48,6 +48,16 @@ spec:
           value: ticket_job
         - name: DB_LOGMODE
           value: "true"
+        - name: TRACE_SAMPLER_TYPE
+          value: "probabilistic"
+        - name: TRACE_SAMPLER_PARAM
+          value: "1"
+        - name: TRACE_ENDPOINT
+          value: "http://jaeger-collector:14268/api/traces"
+        # - name: TRACE_AGENT_HOST
+        #   value: ""
+        - name: TRACE_REPORTER_LOG_SPANS
+          value: "true"
         image: roandocker/cronjob:1.0.0
         imagePullPolicy: Always
         # command: ["/bin/sh","-c", "/root/ticket-cronjob"]
