@@ -53,3 +53,7 @@ projects/build.sh
 docker-compose -f projects/docker/docker-compose.yml up
 ```
 
+### k8s
+```sh
+helm upgrade --install ticket-app k8s/helm/apps/ticket-app/  --set global.resourceRequest.enabled=false --set global.docker.repoHost=ethansmart-docker.pkg.coding.net/istioalltime
+```
