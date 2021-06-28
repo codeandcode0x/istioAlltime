@@ -28,4 +28,4 @@ RUN chmod 777 ticket-frontend.jar && \
 # HEALTHCHECK --interval=5s --timeout=3s --retries=3 \
 #   CMD curl -fs http://localhost:8090 || exit 1
 
-CMD ["/bin/sh", "-c", "java -javaagent:/opt/opentracing-specialagent-1.7.5-SNAPSHOT.jar -DJAEGER_SERVICE_NAME=\${SERVICE_NAME:-'UNKNOWN_SERVICE'} -DJAEGER_SAMPLER_TYPE=\${TRACE_SAMPLER_TYPE:-'probabilistic'} -DJAEGER_SAMPLER_PARAM=\${TRACE_SAMPLER_PARAM:-'0.01'} -DJAEGER_ENDPOINT=\${TRACE_ENDPOINT:-'http://jaeger-collector:14268/api/traces'} \${TRACE_DSA_EXTENDS:-}  -jar /root/ticket-frontend.jar"]
+CMD ["/bin/sh", "-c", "java -javaagent:/root/opentracing-specialagent-1.7.5-SNAPSHOT.jar -DJAEGER_SERVICE_NAME=\${SERVICE_NAME:-'UNKNOWN_SERVICE'} -DJAEGER_SAMPLER_TYPE=\${TRACE_SAMPLER_TYPE:-'probabilistic'} -DJAEGER_SAMPLER_PARAM=\${TRACE_SAMPLER_PARAM:-'0.01'} -DJAEGER_ENDPOINT=\${TRACE_ENDPOINT:-'http://jaeger-collector:14268/api/traces'} \${TRACE_DSA_EXTENDS:-}  -jar /root/ticket-frontend.jar"]
