@@ -5,8 +5,8 @@ FROM golang:stretch as builder
 
 WORKDIR /opt/app/
 
-COPY config/Config.yaml /opt/app/config/Config.yaml
-COPY web /opt/app/web/
+COPY projects/golang/ticket-manager/config/Config.yaml /opt/app/config/Config.yaml
+COPY projects/golang/ticket-manager/web /opt/app/web/
 
 RUN apt-get install git && \
 	git clone https://github.com/codeandcode0x/istioAlltime.git && \

@@ -23,8 +23,8 @@ function build() {
 	version=$1
 	repoUser=$2
 	repoHost=$3
-	docker build -t $repoHost/$repoUser/ticket-manager:$version -f docker/projects/golang/ticket-manager/Dockerfile  --no-cache projects/golang/ticket-manager/
-	docker build -t $repoHost/$repoUser/ticket-frontend:$version -f docker/projects/java/ticket-frontend/Dockerfile  --no-cache projects/java/ticket-frontend/
+	docker build -t $repoHost/$repoUser/ticket-manager:$version -f docker/projects/golang/ticket-manager/Dockerfile  --no-cache ./
+	docker build -t $repoHost/$repoUser/ticket-frontend:$version -f docker/projects/java/ticket-frontend/Dockerfile  --no-cache ./
 	docker build -t $repoHost/$repoUser/initdata-job:$version -f docker/projects/job/initdata-job/Dockerfile --no-cache  projects/job/initdata-job
 	docker build -t $repoHost/$repoUser/k8s-wait-for:$version -f docker/tools/k8s-wait-for/Dockerfile --no-cache  docker/tools/k8s-wait-for
 }

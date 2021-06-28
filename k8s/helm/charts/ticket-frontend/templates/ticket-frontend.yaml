@@ -39,6 +39,20 @@ spec:
         env:
         - name: TICKET_MANAGER_HOST
           value : http://ticket-manager:8080
+        - name: TRACE_SAMPLER_TYPE
+          value: "probabilistic"
+        - name: TRACE_SAMPLER_PARAM
+          value: "1"
+        - name: TRACE_ENDPOINT
+          value: "http://jaeger-collector.istio-system:14268/api/traces"
+        # - name: TRACE_AGENT_HOST
+        #   value: ""
+        - name: TRACE_REPORTER_LOG_SPANS
+          value: "true"
+        - name: SERVICE_NAME
+          value: ticket-frontend
+        - name: TRACE_DSA_EXTENDS
+          value: " -Dsa.exporter=jaeger -Dsa.log.level=FINE -Dsa.integration.*.disable=true -Dsa.integration.servlet.enable=true -Dsa.integration.netty.enable=true -Dsa.integration.grpc.enable=true -Dsa.integration.jdbc.enable=true -Dsa.integration.jedis.enable=true -Dsa.integration.lettuce.enable=true -Dsa.integration.redisson.enable=true -Dsa.integration.okhttp.enable=true -Dsa.integration.spring:webmvc.enable=true""
         image: "{{ .Values.global.docker.repoHost }}/{{ .Values.image.ticketFrontend }}"
         imagePullPolicy: Always
         # command: ["/bin/sh", "-c", "java -jar /root/ticket-frontend.jar"]
