@@ -11,7 +11,7 @@ RUN apt-get install git && \
 	git clone https://github.com/codeandcode0x/istioAlltime.git && \
 	cd istioAlltime/projects/java/ticket-frontend/ && \
 	mvn clean install && \
-	cp projects/java/ticket-frontend/target/ticket.frontend-0.0.1-SNAPSHOT.jar  /opt/app/ticket-frontend.jar
+	cp target/ticket.frontend-0.0.1-SNAPSHOT.jar  /opt/app/ticket-frontend.jar
 
 
 FROM openjdk:8-jdk-oraclelinux7 as prod
