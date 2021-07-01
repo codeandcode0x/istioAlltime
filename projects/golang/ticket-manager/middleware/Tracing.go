@@ -10,7 +10,8 @@ func Tracing() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// add tracing
 		_, cancel := tracing.AddHttpTracing(
-			"ticket-manager"+c.FullPath(),
+			"ticket-manager",
+			c.Request.URL.String()+" "+c.Request.Method,
 			c.Request.Header,
 			map[string]string{
 				"component":      "gin-server",

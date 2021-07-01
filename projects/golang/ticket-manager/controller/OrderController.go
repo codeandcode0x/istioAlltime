@@ -71,7 +71,7 @@ func (uc *OrderController) GetAllOrders(c *gin.Context) {
 
 func (uc *OrderController) GetOrderByPages(c *gin.Context) {
 	// add tracing
-	_, cancel := tracing.AddHttpTracing("OrderService", c.Request.Header, map[string]string{})
+	_, cancel := tracing.AddHttpTracing("OrderService", "/order GET", c.Request.Header, map[string]string{})
 	defer cancel()
 
 	orders, err := uc.getOrderController().Service.FindOrderByPages(1, 1)
