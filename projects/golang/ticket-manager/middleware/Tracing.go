@@ -1,6 +1,8 @@
 package middleware
 
 import (
+	"log"
+
 	tracing "github.com/codeandcode0x/traceandtrace-go"
 	"github.com/gin-gonic/gin"
 )
@@ -23,6 +25,8 @@ func Tracing() gin.HandlerFunc {
 				"spanKind":       "server",
 			})
 		defer cancel()
+
+		log.Println("..... tracing header ", c.Request.Header)
 
 		c.Next()
 		return

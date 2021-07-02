@@ -47,4 +47,12 @@ docker run \
 
 
 
+java -javaagent:docker/tools/java-tracing-agent/opentracing-specialagent-1.7.5-SNAPSHOT.jar -DJAEGER_SERVICE_NAME="ticket-frontend" -DJAEGER_SAMPLER_TYPE=probabilistic -DJAEGER_SAMPLER_PARAM=1 -DJAEGER_ENDPOINT=http://localhost:6831  ${TRACE_DSA_EXTENDS}  -jar projects/java/ticket-frontend/target/ticket.frontend-0.0.1-SNAPSHOT.jar
+
+
 ```
+
+
+
+
+
