@@ -3,13 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
-	"google.golang.org/grpc"
 	movie "ticket-manager/rpc/grpc/protos/movie"
 	user "ticket-manager/rpc/grpc/protos/user"
+
+	"google.golang.org/grpc"
 )
 
-func main()  {
-	conn, err := grpc.Dial(":20153", grpc.WithInsecure())
+func main() {
+	conn, err := grpc.Dial(":22530", grpc.WithInsecure())
 	if err != nil {
 		fmt.Printf("faild to connect: %v", err)
 	}
@@ -25,5 +26,5 @@ func main()  {
 	r1, err := c1.GetAllUsers(context.Background(), &user.UserMsgRequest{Count: 100})
 
 	fmt.Printf("movie list : %s !\n", r.Message)
-	fmt.Printf("user list : %s !\n",  r1.Message)
+	fmt.Printf("user list : %s !\n", r1.Message)
 }

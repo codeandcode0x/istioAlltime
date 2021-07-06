@@ -2,9 +2,10 @@ package com.msa.ticket.frontend.pojo;
 
 import com.msa.ticket.frontend.model.Movie;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MovieDatas {
+public class MovieDatas implements Serializable {
     private Integer code;
     private List<Movie> data;
 

@@ -10,8 +10,9 @@ import (
 // Tracing 中间件
 func Tracing() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		log.Println("..... tracing header1 ", c.Request.Header)
 		// add tracing
-		_, cancel := tracing.AddHttpTracing(
+		pctx, cancel := tracing.AddHttpTracing(
 			"ticket-manager",
 			c.Request.URL.String()+" "+c.Request.Method,
 			c.Request.Header,
@@ -26,8 +27,8 @@ func Tracing() gin.HandlerFunc {
 			})
 		defer cancel()
 
-		log.Println("..... tracing header ", c.Request.Header)
-
+		// deliver parent context
+		c.Set("parentCtx", pctx)
 		c.Next()
 		return
 	}

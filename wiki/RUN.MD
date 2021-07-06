@@ -47,8 +47,11 @@ docker run \
 
 
 
-java -javaagent:docker/tools/java-tracing-agent/opentracing-specialagent-1.7.5-SNAPSHOT.jar -DJAEGER_SERVICE_NAME="ticket-frontend" -DJAEGER_SAMPLER_TYPE=probabilistic -DJAEGER_SAMPLER_PARAM=1 -DJAEGER_ENDPOINT=http://localhost:6831  ${TRACE_DSA_EXTENDS}  -jar projects/java/ticket-frontend/target/ticket.frontend-0.0.1-SNAPSHOT.jar
+java -javaagent:docker/tools/java-tracing-agent/opentracing-specialagent-1.7.5-SNAPSHOT.jar -DJAEGER_SERVICE_NAME="ticket-frontend" -DJAEGER_SAMPLER_TYPE=probabilistic -DJAEGER_SAMPLER_PARAM=1 -DJAEGER_ENDPOINT=http://localhost:6831  -Dsa.exporter=jaeger -Dsa.log.level=FINE -Dsa.integration.*.disable=true -Dsa.integration.servlet.enable=true -Dsa.integration.netty.enable=true -Dsa.integration.grpc.enable=true -Dsa.integration.jdbc.enable=true -Dsa.integration.jedis.enable=true -Dsa.integration.lettuce.enable=true -Dsa.integration.redisson.enable=true -Dsa.integration.okhttp.enable=true -Dsa.integration.spring:webmvc.enable=true  -jar projects/java/ticket-frontend/target/ticket.frontend-0.0.1-SNAPSHOT.jar
 
+
+
+# command: ["/bin/sh", "-c", "java -javaagent:/root/opentracing-specialagent-1.7.5-SNAPSHOT.jar -DJAEGER_SERVICE_NAME=${SERVICE_NAME} -DJAEGER_SAMPLER_TYPE=${TRACE_SAMPLER_TYPE} -DJAEGER_SAMPLER_PARAM=${TRACE_SAMPLER_PARAM} -DJAEGER_ENDPOINT=${TRACE_ENDPOINT} ${TRACE_DSA_EXTENDS}  -jar /root/ticket-frontend.jar"]
 
 ```
 

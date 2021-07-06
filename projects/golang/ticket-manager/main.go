@@ -10,6 +10,7 @@ import (
 	movieRpc "ticket-manager/rpc/grpc/service/movie"
 	userRpc "ticket-manager/rpc/grpc/service/user"
 
+	tracing "github.com/codeandcode0x/traceandtrace-go"
 	"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/sync/errgroup"
@@ -44,15 +45,19 @@ func main() {
 }
 
 func RpcServer() {
-	lis, err := net.Listen("tcp", ":20153")
+	// add gRPC tracing
+	rpcOption, closer, _ := tracing.AddRpcServerTracing("RpcServer")
+	defer closer.Close()
+
+	lis, err := net.Listen("tcp", ":22530")
 	if err != nil {
 		fmt.Printf("failed to listen: %v", err)
 		return
 	}
 
-	s := grpc.NewServer()
-	movie.RegisterMovieRPCServer(s, &movieRpc.MoiveRpcServer{})
-	user.RegisterUserRPCServer(s, &userRpc.UserRpcServer{})
+	s := grpc.NewServer(rpcOption)
+	movie.RegisterMovieRPCServer(s, &movieRpc.MoiveRPCServer{})
+	user.RegisterUserRPCServer(s, &userRpc.UserRPCServer{})
 	reflection.Register(s)
 	err = s.Serve(lis)
 

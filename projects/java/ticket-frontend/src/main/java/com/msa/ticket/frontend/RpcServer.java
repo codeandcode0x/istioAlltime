@@ -14,7 +14,7 @@ public class RpcServer {
 
     public void Start() throws IOException {
       /* The port on which the server should run */
-      int port = 20153;
+      int port = 22530;
       server = ServerBuilder.forPort(port)
           .addService(new MovieServer())
           .addService(new UserServer())

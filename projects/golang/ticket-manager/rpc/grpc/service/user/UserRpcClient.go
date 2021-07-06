@@ -3,12 +3,13 @@ package user
 import (
 	"context"
 	"fmt"
-	"google.golang.org/grpc"
 	user "ticket-manager/rpc/grpc/protos/user"
+
+	"google.golang.org/grpc"
 )
 
-func main()  {
-	conn, err := grpc.Dial(":20153", grpc.WithInsecure())
+func main() {
+	conn, err := grpc.Dial(":22530", grpc.WithInsecure())
 	if err != nil {
 		fmt.Printf("faild to connect: %v", err)
 	}

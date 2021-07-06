@@ -52,11 +52,10 @@ spec:
         - name: SERVICE_NAME
           value: ticket-frontend
         - name: TRACE_DSA_EXTENDS
-          value: " -Dsa.exporter=jaeger -Dsa.log.level=FINE -Dsa.integration.*.disable=true -Dsa.integration.servlet.enable=true -Dsa.integration.netty.enable=true -Dsa.integration.grpc.enable=true -Dsa.integration.jdbc.enable=true -Dsa.integration.jedis.enable=true -Dsa.integration.lettuce.enable=true -Dsa.integration.redisson.enable=true -Dsa.integration.okhttp.enable=true -Dsa.integration.spring:webmvc.enable=true"
-          # value: " -Dsa.exporter=jaeger -Dsa.log.level=FINE -Dsa.integration.*.disable=true "
+          # value: " -Dsa.exporter=jaeger -Dsa.log.level=FINE -Dsa.integration.*.disable=true -Dsa.integration.servlet.enable=true -Dsa.integration.netty.enable=true -Dsa.integration.grpc.enable=true -Dsa.integration.jdbc.enable=true -Dsa.integration.jedis.enable=true -Dsa.integration.lettuce.enable=true -Dsa.integration.redisson.enable=true -Dsa.integration.okhttp.enable=true -Dsa.integration.spring:webmvc.enable=true"
+          value: " -Dsa.exporter=jaeger -Dsa.log.level=FINE -Dsa.integration.*.disable=true "
         image: "{{ .Values.global.docker.repoHost }}/{{ .Values.image.ticketFrontend }}"
         imagePullPolicy: Always
-        command: ["/bin/sh", "-c", "java -javaagent:/root/opentracing-specialagent-1.7.5-SNAPSHOT.jar -DJAEGER_SERVICE_NAME=${SERVICE_NAME} -DJAEGER_SAMPLER_TYPE=${TRACE_SAMPLER_TYPE} -DJAEGER_SAMPLER_PARAM=${TRACE_SAMPLER_PARAM} -DJAEGER_ENDPOINT=${TRACE_ENDPOINT} ${TRACE_DSA_EXTENDS}  -jar /root/ticket-frontend.jar"]
         livenessProbe:
           initialDelaySeconds: 30
           periodSeconds: 10
@@ -86,7 +85,7 @@ spec:
         {{- end }}
       enableServiceLinks: false
       # imagePullSecrets:
-      # - name: codingcorp-registry-cred
+      # - name: 
 ---
 apiVersion: v1
 kind: Service

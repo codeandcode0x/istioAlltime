@@ -8,9 +8,9 @@ import (
 	"golang.org/x/net/context"
 )
 
-type MoiveRpcServer struct{}
+type MoiveRPCServer struct{}
 
-func (s *MoiveRpcServer) GetAllMovies(ctx context.Context, request *movie.MovieMsgRequest) (*movie.MovieMsgReply, error) {
+func (s *MoiveRPCServer) GetAllMovies(ctx context.Context, request *movie.MovieMsgRequest) (*movie.MovieMsgReply, error) {
 	var movieSerive service.MovieService
 	movies, err := movieSerive.FindAllMovies()
 	if err != nil {

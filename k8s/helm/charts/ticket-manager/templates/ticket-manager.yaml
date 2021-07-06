@@ -61,7 +61,6 @@ spec:
           value: "true"
         image: "{{ .Values.global.docker.repoHost }}/{{ .Values.image.ticketManager }}"
         imagePullPolicy: Always
-        # command: ["/bin/sh","-c", "/root/ticket-manager"]
         livenessProbe:
           initialDelaySeconds: 30
           periodSeconds: 10
@@ -89,7 +88,7 @@ spec:
         {{- end }}
       enableServiceLinks: false
       # imagePullSecrets:
-      # - name: codingcorp-registry-cred
+      # - name: 
 ---
 apiVersion: v1
 kind: Service

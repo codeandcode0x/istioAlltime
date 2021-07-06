@@ -68,15 +68,41 @@ public class HomeController {
 
     @GetMapping("/movies")
     public String GetMovies(@RequestParam(name="name", required = false, defaultValue = "ethan") String name, Model model) {
-        logger.info(env.getProperty("TICKET_MANAGER_HOST"));
-        if (env.getProperty("TICKET_MANAGER_HOST") != null) {
-            ticketHost = env.getProperty("TICKET_MANAGER_HOST");
-        }
+
+        // Configuration config = new Configuration("Hello Jaeger");
+
+        // Configuration.SenderConfiguration sender = new Configuration.SenderConfiguration();
+        // sender.withAgentHost("localhost");
+        // sender.withAgentPort(6831);
+        // config.withReporter(new Configuration.ReporterConfiguration().withSender(sender).withFlushInterval(100).withLogSpans(false));
+
+        // config.withSampler(new Configuration.SamplerConfiguration().withType("const").withParam(1));
+
+        // io.opentracing.Tracer tracer = config.getTracer();
+        // System.out.println(tracer.toString());
+        // // GlobalTracer.register(tracer);
+        // Tracer.SpanBuilder spanBuilder = GlobalTracer.get().buildSpan("hello");
+        // Span parent = spanBuilder.start();
+        
+        // logger.info(env.getProperty("TICKET_MANAGER_HOST"));
+        // if (env.getProperty("TICKET_MANAGER_HOST") != null) {
+        //     ticketHost = env.getProperty("TICKET_MANAGER_HOST");
+        // }
+
         String url = ticketHost+"/api/movies";
         RestTemplate restTemplate = new RestTemplate();
-        MovieDatas movies = restTemplate.getForObject(url, MovieDatas.class);
-        System.out.println(movies);
+        HttpHeaders headers = new HttpHeaders();
+        // headers.set("Uber-Trace-Id", parent.context().toString());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        Map<String, Object> map = new HashMap<String, Object>();
+        HttpEntity<Map<String, Object>> request = new HttpEntity<Map<String, Object>>(map, headers);
+        ResponseEntity<MovieDatas> response = restTemplate.exchange(url, HttpMethod.GET,request, MovieDatas.class);
+        System.out.println(response.getBody());
+        MovieDatas  movies = response.getBody();
 
+        System.out.println("---------" + headers);
+        // MovieDatas movies = restTemplate.getForObject(url ,MovieDatas.class);
+        System.out.println(movies);
         assert movies != null;
         model.addAttribute("movies", movies.getData());
         return "movies";
